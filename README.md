@@ -20,6 +20,8 @@ These projects demonstrate my ability to design scalable, low-code automations f
 
 > *Visual summary of my top 4 automation workflows — from data collection to AI-powered translation.*
 
+💡 **Note:** The complete visual portfolio — including detailed images and workflow breakdowns — is available as a PDF named **`n8n_portfolio.pdf`** in the **`assets/`** folder.
+
 ---
 
 ## 🧩 **Included Projects**
@@ -84,8 +86,6 @@ If you’re interested in automation projects, workflow design, or integrating A
 
 **💼 Focus:** *Automation Development · AI Integration · Data Workflows*  
 
-**🌐 Portfolio:** *to be added once live*  
-
 **📧 Email:** *siefshama@gmail.com*  
 
-**🔗 LinkedIn / GitHub:** *[https://www.linkedin.com/in/siefshama/](https://www.linkedin.com/in/siefshama/)*
+**🔗 LinkedIn:** [linkedin.com/in/siefshama](https://www.linkedin.com/in/siefshama/)
