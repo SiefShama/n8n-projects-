@@ -1,114 +1,93 @@
-# 📸 **Instagram Hashtag Scraper — Automated Workflow**
+# 💼 **Instagram Influencer Scraper — Profile Extractor**
 
-### 📘 **Overview**
-
-This n8n workflow automates the process of **scraping Instagram posts by hashtag** and extracting detailed **profile data** for each post owner.  
-By simply entering a hashtag, it collects recent posts, extracts usernames, and gathers **public profile details** — all saved automatically to **Google Sheets** for analysis or CRM use.
-
-This project demonstrates **data automation**, **social media analysis**, and **API-based data extraction** using n8n’s modular workflow design.
+This n8n workflow automates collecting detailed **influencer data** from Instagram usernames using a public scraper API.  
+It extracts profile info such as **bio, followers count, category, contact details,** and **engagement metrics**, then writes it automatically to **Google Sheets** — ideal for influencer research, campaign targeting, or CRM integration.
 
 ---
 
-## ⚙️ **How It Works**
+## 🚀 **Overview**
 
-1. **User Input (Hashtag Entry)**  
-   The workflow begins with a manual or scheduled trigger where the user inputs a hashtag (e.g., `#fashionblogger`).
+The workflow takes a list of **Instagram usernames** (manually entered or fetched from a previous workflow) and scrapes their **public profiles**.  
+All results are neatly stored in a Google Sheet for easy analysis.
 
-2. **Post Fetching**  
-   The workflow connects to an external Instagram scraper API to collect the latest posts for that hashtag, returning post URLs, captions, and usernames.
-
-3. **Profile Extraction**  
-   It then loops through each username to gather public profile data such as:  
-   * Username  
-   * Followers count  
-   * Bio  
-   * Category or niche  
-   * Contact info (if available)  
-   * Engagement metrics  
-
-4. **Google Sheets Integration**  
-   Each profile’s data is structured and written into a connected Google Sheet, ready for analysis or influencer selection.
+**Main Features:**
+- Automatically collects influencer data from usernames  
+- Gathers public profile info like bio, followers, and engagement stats  
+- Writes clean, structured data to Google Sheets  
+- Can be combined with hashtag scrapers or CRM workflows  
+- Supports batching and scheduling to avoid API limits  
 
 ---
 
-## 🧩 **Core Process Overview**
+## ⚙️ **Workflow Steps**
 
-| Stage  | Function        | Output                         |
-| ------ | --------------- | ------------------------------ |
-| Part 1 | Hashtag Input   | Triggers the workflow          |
-| Part 2 | Post Collection | List of users per hashtag      |
-| Part 3 | Profile Scraper | User info from public profiles |
-| Part 4 | Data Export     | Google Sheets record           |
-
-Each part is modular and can be reused independently or combined for full automation.
+1. **Start Node** — Trigger manually or on schedule.  
+2. **Google Sheets Node** — Fetch a list of usernames to process.  
+3. **Split In Batches** — Handles usernames in small sets for efficiency.  
+4. **API Call (Instagram Scraper)** — Retrieves public profile data for each username.  
+5. **Set Node** — Formats and maps results into clean fields.  
+6. **Google Sheets Node** — Appends structured data into your influencer data sheet.  
 
 ---
 
-## 🧭 **Setup Guide**
+## 🧩 **Output**
 
-### 1️⃣ **Preparation**
-
-* Set up your **Google Sheets** integration in n8n.  
-* Create one Google Sheet for storing collected profile data.  
-* Obtain access to a **public Instagram scraping API** (such as Apify, RapidAPI, or another endpoint provider).  
-* Add the API credentials securely in n8n.
-
-### 2️⃣ **Execution**
-
-* Enter a target **hashtag** in the workflow trigger node.  
-* Run the workflow — it will fetch posts, extract usernames, and retrieve profile details.  
-* The final dataset will automatically populate your connected Google Sheet.
+| Column | Description |
+|--------|--------------|
+| 🟩 **Username** | Instagram handle (without @) |
+| 🟨 **Full Name** | Display name from profile |
+| 🟦 **Followers** | Total follower count |
+| 🟧 **Bio** | Profile bio text |
+| 🟥 **Category** | Detected content category or niche |
+| 🟪 **Email** | Public contact email (if available) |
+| 🟫 **Engagement Rate** | Estimated or scraped metric |
 
 ---
 
-## 🧠 **Tips & Best Practices**
+## 🧠 **Tips & Customization**
 
-* Limit API calls to avoid **rate limits** or **temporary blocks**.  
-* Use **n8n’s Wait or SplitInBatches** nodes for controlled requests.  
-* Run the workflow on a **schedule** (e.g., daily or weekly) to collect ongoing data.  
-* For better segmentation, use a separate sheet per hashtag or campaign.  
-* Verify data fields (some profiles may hide certain info).
-
----
-
-## 🧾 **Example Result**
-
-After the workflow completes:
-
-* The Google Sheet contains influencer profiles extracted by hashtag.  
-* Each row includes profile details, bio, follower count, and post engagement data.  
-* Perfect for CRM imports, campaign targeting, or influencer analysis.
+- Combine this workflow with **Project 3 (Hashtag Scraper)** to first collect usernames, then enrich them here.  
+- Use **Split In Batches** and **Wait** nodes to prevent rate-limit errors.  
+- Add filtering logic to skip duplicates or private profiles.  
+- Use a webhook or email node to get notified after each batch completes.  
 
 ---
 
 ## 🪪 **Requirements**
 
-* n8n version ≥ 1.50  
-* Google Sheets account and credentials  
-* Access to a compatible Instagram scraping API  
+- 🔑 Access to a **public Instagram scraping API** (e.g., Apify, RapidAPI)  
+- 📄 Connected **Google Sheets** credentials in n8n  
+- 🌐 Public Instagram accounts (private ones are skipped automatically)  
 
 ---
 
-## 🧩 **Tech Stack**
+## 🧰 **Preparation**
 
-* **Platform:** n8n  
-* **Integrations:** Google Sheets API, Instagram Scraper API  
-* **Data Handling:** JSON to Sheet conversion, looping, and structured extraction  
-* **Automation Type:** API-driven data pipeline  
+Before running:
+- Connect **Google Sheets** and your **Instagram Scraper API** credentials in n8n  
+- Create a Google Sheet named `InfluencerProfiles` with headers matching the output table  
+- Add usernames (one per row) in the first column before starting the workflow  
+
+---
+
+## 💡 **Example Use Case**
+
+A marketing agency has a list of influencer usernames.  
+They run this workflow to automatically collect detailed data — bios, followers, and engagement — and export everything into Google Sheets for filtering and campaign selection.
 
 ---
 
 ## 📸 **Preview**
 
 <p align="center">
-  <img src="../assets/instagram-hashtag-scraper-diagram.png" alt="Instagram Hashtag Scraper Workflow" width="800">
+  <img src="../assets/instagram-influencer-scraper-workflow.png" alt="Instagram Influencer Scraper Workflow" width="800">
 </p>
 
-> *Workflow diagram showing the process from hashtag input to Google Sheets export.*
+> *Workflow visualization showing API integration and Google Sheets export.*
 
 ---
 
-## 📬 **Author**
+## 👨‍💼 **About**
 
 **Created by:** Sief Shama  
 **Focus:** Automation Development · Data Engineering · AI Integration  
