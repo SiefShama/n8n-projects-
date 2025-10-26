@@ -1,0 +1,657 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Korean phonetic assistant.\n\nTask:\n- Input: \"{{ $json.Word }}\"\n- Output: JSON array only (no text, no markdown).\n\nSteps:\n1. Convert the word into Hangul (approximate pronunciation).\n2. Provide its romanized phonetic transcription.\n3. Show phonetic breakdown into syllables → Hangul.\n4. Give the final assembled Hangul word alone.\n\nFormat:\n[\n  {\n    \"Word\": \"{{ $json.Word }}\",\n    \"Phonetic\": \"<Romanized transcription>\",\n    \"KoreanPhoneticSyllables\": \"<Syllable mapping into Hangul>\",\n    \"FinalWord\": \"<Final Hangul word>\"\n  }\n]\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "id": "2bc725af-6403-4376-92c0-1aa735c2fc12",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Your First AI Agent2",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1936,
+        -736
+      ],
+      "typeVersion": 2.2,
+      "retryOnFail": true,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "modelName": "models/learnlm-2.0-flash-experimental",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "5cb6f711-2747-4fcb-a48c-8335f41300f8",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Connect Gemini2",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1936,
+        -528
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "yATcXjQj2Vecm3Dz",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1pBfm6RF84E7eLGuVVDmycGiJdHH7RfMbHwC81SWZyu8",
+          "mode": "list",
+          "cachedResultName": "translate",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pBfm6RF84E7eLGuVVDmycGiJdHH7RfMbHwC81SWZyu8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pBfm6RF84E7eLGuVVDmycGiJdHH7RfMbHwC81SWZyu8/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        976,
+        -240
+      ],
+      "id": "1aea438a-09e8-436d-817e-6de97395c007",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "A6TRtMyAbapY7bMO",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1pBfm6RF84E7eLGuVVDmycGiJdHH7RfMbHwC81SWZyu8",
+          "mode": "list",
+          "cachedResultName": "translate",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pBfm6RF84E7eLGuVVDmycGiJdHH7RfMbHwC81SWZyu8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pBfm6RF84E7eLGuVVDmycGiJdHH7RfMbHwC81SWZyu8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "Word"
+          ],
+          "schema": [
+            {
+              "id": "Word",
+              "displayName": "Word",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Korean",
+              "displayName": "Korean",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phonetic ",
+              "displayName": "Phonetic ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "output",
+              "displayName": "output",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phonetic",
+              "displayName": "Phonetic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2624,
+        -736
+      ],
+      "id": "25010109-b5b8-4c76-b0ba-a84e559ddc18",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "CwwAKBIrq7JcdWJk",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input: [{\"output\":\"```json\\n[\\n  {\\n    \\\"Word\\\": \\\"Hi\\\",\\n    \\\"Korean\\\": \\\"안녕\\\",\\n    \\\"Phonetic\\\": \\\"Annyeong\\\"\\n  }\\n]\\n```\"}]\n\nconst raw = $json.output || \"\";\n\n// 1. Remove code fences and extra text\nconst cleaned = raw\n  .replace(/```json/g, \"\")\n  .replace(/```/g, \"\")\n  .trim();\n\n// 2. Parse to object\nlet parsed;\ntry {\n  parsed = JSON.parse(cleaned);\n} catch (e) {\n  parsed = []; // fallback if invalid\n}\n\nreturn parsed;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2320,
+        -736
+      ],
+      "id": "e50b8fb1-aeb9-4ea3-a527-292309e21481",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1712,
+        -752
+      ],
+      "id": "b7aa14bd-283a-49d7-b897-1a017ae7acf1",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Korean translation assistant.\n\nInstructions:\n1. Take the word: \"{{ $json.Word }}\".\n2. Translate it into Korean.\n3. Write the phonetic (romanized pronunciation) of the Korean word.\n4. Return the result strictly in this JSON array format:\n\nYou are a Korean translation assistant.\n\nInstructions:\n1. Take the word: \"{{ $json.Word }}\".\n2. Translate it into Korean.\n3. Write the phonetic (romanized pronunciation) of the Korean word.\n4. Return the result strictly in valid JSON array format, with no code blocks, no explanations, no markdown.\n\nThe output must look exactly like this:\n[\n  {\n    \"Word\": \"{{ $json.Word }}\",\n    \"Korean\": \"<Korean translation>\",\n    \"Phonetic\": \"<Phonetic transcription>\"\n  }\n]\n\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "id": "3dcc5f97-6d6f-4ac1-9051-74ef41d25ca8",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Your First AI Agent3",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1936,
+        144
+      ],
+      "typeVersion": 2.2,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "d6f756ce-53ab-4b8d-9ee5-f03444965772",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Connect Gemini3",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1936,
+        336
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "yATcXjQj2Vecm3Dz",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1pBfm6RF84E7eLGuVVDmycGiJdHH7RfMbHwC81SWZyu8",
+          "mode": "list",
+          "cachedResultName": "translate",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pBfm6RF84E7eLGuVVDmycGiJdHH7RfMbHwC81SWZyu8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pBfm6RF84E7eLGuVVDmycGiJdHH7RfMbHwC81SWZyu8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "Word"
+          ],
+          "schema": [
+            {
+              "id": "Word",
+              "displayName": "Word",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Korean",
+              "displayName": "Korean",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phonetic ",
+              "displayName": "Phonetic ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "output",
+              "displayName": "output",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phonetic",
+              "displayName": "Phonetic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2944,
+        160
+      ],
+      "id": "77b50927-d3a3-4052-8660-32b85c846fb5",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "CwwAKBIrq7JcdWJk",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input: [{\"output\":\"```json\\n[\\n  {\\n    \\\"Word\\\": \\\"Hi\\\",\\n    \\\"Korean\\\": \\\"안녕\\\",\\n    \\\"Phonetic\\\": \\\"Annyeong\\\"\\n  }\\n]\\n```\"}]\n\nconst raw = $json.output || \"\";\n\n// 1. Remove code fences and extra text\nconst cleaned = raw\n  .replace(/```json/g, \"\")\n  .replace(/```/g, \"\")\n  .trim();\n\n// 2. Parse to object\nlet parsed;\ntry {\n  parsed = JSON.parse(cleaned);\n} catch (e) {\n  parsed = []; // fallback if invalid\n}\n\nreturn parsed;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2656,
+        160
+      ],
+      "id": "d18c9f20-9f7a-471c-b58d-331e2e4f6d71",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2320,
+        144
+      ],
+      "id": "60dbba85-d4d1-4cf9-ae06-62282c50ff5c",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "content": "Your AI agent can:\n1. **Receive** messages from the chat\n2. **Select** the right tools (e.g., weather, news, email)\n3. **Respond** with live, helpful answers\n\n\n**Open the AI agent node** and edit the **System Message** to adjust your agent’s thinking, behavior, and replies.\n\n\n\n\n\n\n\n\n\n\n",
+        "height": 348,
+        "width": 396,
+        "color": 7
+      },
+      "id": "1701faca-667a-4fb8-bbd4-e445be4fa15f",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note28",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1856,
+        -944
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n1. [In Google AI Studio](https://aistudio.google.com/app/apikey) click **“Create API key in new project”** and copy it.\n\n2. Open the ```Connect Gemini``` node:\n   * **Select Credential → Create New**\n   * Paste into **API Key** and **Save**\n",
+        "height": 300,
+        "width": 294,
+        "color": 6
+      },
+      "id": "683df82d-61f2-4f71-8274-84154c4c110a",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note67",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1856,
+        -544
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "Your AI agent can:\n1. **Receive** messages from the chat\n2. **Select** the right tools (e.g., weather, news, email)\n3. **Respond** with live, helpful answers\n\n\n**Open the AI agent node** and edit the **System Message** to adjust your agent’s thinking, behavior, and replies.\n\n\n\n\n\n\n\n\n\n\n",
+        "height": 348,
+        "width": 396,
+        "color": 7
+      },
+      "id": "14b57ca3-50af-47f4-9574-9aadf563c553",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note68",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1856,
+        -48
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n1. [In Google AI Studio](https://aistudio.google.com/app/apikey) click **“Create API key in new project”** and copy it.\n\n2. Open the ```Connect Gemini``` node:\n   * **Select Credential → Create New**\n   * Paste into **API Key** and **Save**\n",
+        "height": 316,
+        "width": 294,
+        "color": 6
+      },
+      "id": "9f12a60e-2931-4966-bac5-b4e3f70d70a9",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note69",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1856,
+        304
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "\n## 🧠 **Project Overview**\n\n**Purpose:**\nThis n8n workflow automates **translating and phonetically transcribing English words into Korean** using **Google Gemini AI** and automatically writes results back into a **Google Sheet**.\n\nThere are **two main AI branches (loops)** inside one workflow:\n\n1. **Phonetic Assistant (Korean pronunciation generator)**\n2. **Translation Assistant (Korean translation generator)**\n\nBoth start from the same **Google Sheets Trigger** node.\n\n---\n\n## ⚙️ **Node Flow Summary**\n\n### 🟢 **Main Trigger**\n\n**Google Sheets Trigger**\nThis node watches a specific Google Sheet (`translate` / `Sheet1`) for new or changed rows.\nWhen a new word appears in the **Word** column, it starts the workflow and sends data to both the phonetic and translation branches.\n\n---\n\n### 🔁 **Phonetic Assistant Branch**\n\nThis branch focuses on generating Korean phonetic pronunciation and Hangul breakdowns.\n\n1. **Loop Over Items** — Iterates through each row retrieved from Google Sheets.\n2. **Your First AI Agent2** — Acts as the Korean phonetic assistant. It converts the word into Hangul, provides the romanized transcription, shows syllable mapping, and outputs clean JSON.\n3. **Connect Gemini2** — Connects to Google Gemini to process the phonetic generation.\n4. **Code** — Cleans and parses the Gemini output, removing markdown and parsing JSON safely.\n5. **Update row in sheet** — Writes the phonetic and Hangul results back into the Google Sheet, matching each word by the **Word** column.\n\n---\n\n### 🔁 **Translation Assistant Branch**\n\nThis branch focuses on translating English words into Korean and providing romanized transcriptions.\n\n1. **Your First AI Agent3** — Acts as the Korean translation assistant. It translates each word into Korean, adds a phonetic transcription, and outputs the result in a clean JSON format.\n2. **Connect Gemini3** — Provides the Gemini language model for translation generation.\n3. **Loop Over Items1** — Iterates through rows for translation updates.\n4. **Code1** — Cleans and parses the Gemini output just like the previous branch.\n5. **Update row in sheet1** — Writes the translated and phonetic results back to Google Sheets using the **Word** column as the reference.\n\n---\n\n### 🗒️ **Sticky Notes (Informational)**\n\nThese are added inside n8n for quick reference:\n\n* Setup instructions for connecting the Gemini API via **Google AI Studio**.\n* Notes about editing the AI agent’s system prompts to control how the assistants think and respond.\n\n---\n\n## 🧩 **Execution Logic Summary**\n\n1. The workflow starts when a new word is added to the Google Sheet.\n2. Both branches — the phonetic and translation assistants — run in parallel.\n3. Each branch sends the “Word” to its designated AI Agent.\n4. Gemini generates a structured JSON response.\n5. The Code nodes clean and parse this output.\n6. The Google Sheets nodes then update the original rows with the new Korean and phonetic data.\n\n---\n\n## 📝 **Notes**\n\n* Ensure both Google Sheets and Gemini credentials are active.\n* Required columns: `Word`, `Korean`, `Phonetic`, and optionally `output`.\n* Best suited when the Google Sheet structure is fixed and well-known.\n* Avoid running multiple updates simultaneously to prevent syncing issues.\n",
+        "height": 2000,
+        "width": 3744,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -608,
+        -1296
+      ],
+      "typeVersion": 1,
+      "id": "bdb23855-e159-4062-93ea-c6f650a368c3",
+      "name": "Sticky Note70"
+    },
+    {
+      "parameters": {
+        "content": "---\n\n### 🔁 **Branch 1 — Korean Phonetic Assistant**\n\n**(for Hangul phonetics and pronunciation breakdown)**\n\n1. **Loop Over Items**\n\n   * Iterates through each row from Google Sheets.\n\n2. **Your First AI Agent2**\n\n   * System Prompt: “You are a Korean phonetic assistant.”\n   * Tasks:\n\n     * Convert the word to Hangul (approximate pronunciation).\n     * Provide romanized transcription.\n     * Show syllable breakdown and final assembled word.\n     * Return clean JSON.\n\n3. **Connect Gemini2**\n\n   * The language model connection (Gemini API key).\n   * Handles text generation for the AI Agent2 node.\n\n4. **Code**\n\n   * Cleans the Gemini output:\n\n     * Removes markdown/code fences.\n     * Parses JSON safely into a usable array.\n\n5. **Update row in sheet**\n\n   * Maps the parsed results back to Google Sheets:\n\n     * Matches by “Word”\n     * Updates columns such as `Korean`, `Phonetic`, or `output`.\n\n**Flow:**\n🟢 *Google Sheets Trigger → Loop Over Items → Your First AI Agent2 → Code → Update row in sheet*\n\n---",
+        "height": 864,
+        "width": 2016,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1104,
+        -1072
+      ],
+      "typeVersion": 1,
+      "id": "4e438a99-f66a-442a-8f75-2d33d4e1a87b",
+      "name": "Sticky Note71"
+    },
+    {
+      "parameters": {
+        "content": "### 🔁 **Branch 2 — Korean Translation Assistant**\n\n**(for real translation + romanization)**\n\n1. **Loop Over Items1**\n\n   * Iterates through each row for translation processing.\n\n2. **Your First AI Agent3**\n\n   * System Prompt: “You are a Korean translation assistant.”\n   * Tasks:\n\n     * Translate the word into Korean.\n     * Provide romanized pronunciation.\n     * Return JSON array (no markdown, no explanation).\n\n3. **Connect Gemini3**\n\n   * Gemini model connection for the translation AI Agent.\n\n4. **Code1**\n\n   * Cleans Gemini output (same as previous Code node).\n   * Parses to extract JSON data safely.\n\n5. **Update row in sheet1**\n\n   * Writes translation and phonetic results back to the same Google Sheet.\n   * Matches rows using “Word”.\n\n**Flow:**\n🟢 *Google Sheets Trigger → Your First AI Agent3 → Loop Over Items1 → Code1 → Update row in sheet1*\n",
+        "height": 864,
+        "width": 2016,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1104,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "2ebd594f-fe94-43b7-874d-6c1965e56cad",
+      "name": "Sticky Note72"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Your First AI Agent2": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Connect Gemini2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Your First AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Your First AI Agent3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Your First AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Your First AI Agent3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Connect Gemini3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Your First AI Agent3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "",
+  "meta": {
+    "instanceId": "42e7a059891abee801d3209c5f3788d2bff0ccd72a43fc3e429d92455a855d27"
+  },
+  "tags": []
+}
