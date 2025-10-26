@@ -1,2 +1,2 @@
 # n8n-projects-
-Showcasing my n8n automation portfolio — a collection of completed workflows with documentation for each node and project to demonstrate various automation use cases.
+This repository showcases my portfolio of completed n8n automation projects. Each workflow includes a detailed description and node breakdown, highlighting my ability to design efficient, real-world automation solutions.
