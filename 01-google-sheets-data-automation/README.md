@@ -113,7 +113,9 @@ Example:
 ## 📬 **Author**
 
 **Created by:** Sief Shama
+
 **Focus:** Automation Development · Data Engineering · AI Integration
+
 **LinkedIn:** [linkedin.com/in/siefshama](https://www.linkedin.com/in/siefshama/)
 
 
