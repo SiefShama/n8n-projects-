@@ -1,25 +1,25 @@
-# 📸 Instagram Hashtag Scraper — Automated Workflow
+# 📸 **Instagram Hashtag Scraper — Automated Workflow**
 
 Automatically scrape Instagram posts from any hashtag and collect detailed profile data for each post’s owner.  
 This workflow lets you input a hashtag, fetch recent posts, extract usernames, and gather their public profile information — all stored neatly in Google Sheets.
 
 ---
 
-## 🚀 Overview
+## 🚀 **Overview**
 
 This n8n workflow automates the process of discovering influencer profiles based on a chosen hashtag.  
 It collects recent posts for that hashtag, extracts each post’s owner, and scrapes profile data such as bio, full name, follower count, and privacy status — all updated automatically in your Google Sheet.
 
 **Main Features:**
-- Scrape recent posts for any hashtag using **Apify**
-- Extract post owner usernames and loop through them for profile scraping
-- Collect influencer bio, full name, and followers count
-- Clean and format all results for a consistent Google Sheets dataset
-- Extend easily with Telegram, Airtable, or Email notifications
+- Scrape recent posts for any hashtag using **Apify**  
+- Extract post owner usernames and loop through them for profile scraping  
+- Collect influencer bio, full name, and followers count  
+- Clean and format all results for a consistent Google Sheets dataset  
+- Extend easily with **Telegram**, **Airtable**, or **Email** notifications  
 
 ---
 
-## ⚙️ Workflow Steps
+## ⚙️ **Workflow Steps**
 
 1. **Form Trigger** — Collects user input (the hashtag to scrape).  
 2. **Run an Actor (Apify)** — Launches the Apify actor to scrape recent posts from the given hashtag.  
@@ -33,7 +33,7 @@ It collects recent posts for that hashtag, extracts each post’s owner, and scr
 
 ---
 
-## 🧩 Output
+## 🧩 **Output**
 
 | Sheet | Description |
 |-------|--------------|
@@ -41,7 +41,7 @@ It collects recent posts for that hashtag, extracts each post’s owner, and scr
 
 ---
 
-## 🧠 Tips & Customization
+## 🧠 **Tips & Customization**
 
 - Adjust the number of posts per hashtag inside the Apify actor (`resultsLimit` field).  
 - Add or remove profile fields in the “Edit Fields” node as needed.  
@@ -50,7 +50,7 @@ It collects recent posts for that hashtag, extracts each post’s owner, and scr
 
 ---
 
-## 🪪 Requirements
+## 🪪 **Requirements**
 
 - 🔑 Active **Apify** account with access to Instagram scraper actors  
 - 📄 Connected **Google Sheets** credentials in n8n  
@@ -58,7 +58,7 @@ It collects recent posts for that hashtag, extracts each post’s owner, and scr
 
 ---
 
-## 🧰 Preparation
+## 🧰 **Preparation**
 
 Before running, make sure you:
 - Connect your **Apify** and **Google Sheets** credentials inside n8n  
@@ -67,21 +67,25 @@ Before running, make sure you:
 
 ---
 
-## 💡 Example Use Case
+## 💡 **Example Use Case**
 
 A marketing analyst wants to find micro-influencers posting under **#skincareegypt**.  
 They enter the hashtag, run the workflow, and receive a clean Google Sheet containing each influencer’s username, full name, bio, and followers count — ready for outreach or CRM import.
 
 ---
 
-## 📸 Preview
+## 📸 **Preview**
 
-![Instagram Hashtag Scraper Workflow](assets/instagram-hashtag-scraper-diagram.png)
+<p align="center">
+  <img src="../assets/instagram-hashtag-scraper-diagram.png" alt="Instagram Hashtag Scraper Workflow" width="800">
+</p>
+
+> *Workflow diagram showing the end-to-end process from hashtag input to Google Sheets export.*
 
 ---
 
-## 👨‍💼 About
+## 👨‍💼 **About**
 
-Created by **Sief Shama**  
-🔗 [LinkedIn Profile](https://www.linkedin.com/in/siefshama/)
-
+**Created by:** Sief Shama  
+**Focus:** Automation Development · Data Engineering · AI Integration  
+**LinkedIn:** [linkedin.com/in/siefshama](https://www.linkedin.com/in/siefshama/)
