@@ -1,0 +1,1168 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        3536,
+        1040
+      ],
+      "id": "e0868aa2-162e-454e-9aaa-fd872f53d6d3",
+      "name": "Wait",
+      "webhookId": "27cc6964-8eb6-487e-b1e6-176b9bda4c70",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8781c8f3-186e-4675-bc0c-6de4f727bac2",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        1040
+      ],
+      "id": "09a3b04a-9692-4daf-b765-2c2b769f4416",
+      "name": "Pages Name"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1344,
+        1040
+      ],
+      "id": "20ca1f98-1cd4-41a0-9398-157a0706662f",
+      "name": "Loop Over page names"
+    },
+    {
+      "parameters": {
+        "actorId": {
+          "__rl": true,
+          "value": "=https://console.apify.com/actors/zTSjdcGqjg6KEIBlt/input?addFromActorId=zTSjdcGqjg6KEIBlt",
+          "mode": "url"
+        },
+        "customBody": "={\n    \"resultsLimit\": 30,\n    \"username\": [\n        \"{{ $json.name }}\"\n    ]\n}",
+        "timeout": {}
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        1056
+      ],
+      "id": "d33c3197-273a-4000-977a-d7566b90b59a",
+      "name": "Page posts scraper",
+      "credentials": {
+        "apifyApi": {
+          "id": "6iUM0owlL1ByKN38",
+          "name": "Apify account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "Datasets",
+        "datasetId": "={{ $json.defaultDatasetId }}",
+        "offset": {}
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        1056
+      ],
+      "id": "3201c1ae-9a8f-443c-bbc3-f5db9be752b4",
+      "name": "Get dataset for posts",
+      "credentials": {
+        "apifyApi": {
+          "id": "6iUM0owlL1ByKN38",
+          "name": "Apify account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4546972e-a76b-464d-b5e7-477ccc439ec5",
+              "name": "ownerUsername",
+              "value": "={{ $json.ownerUsername }}",
+              "type": "string"
+            },
+            {
+              "id": "b9024b51-4f7e-49d3-932e-22b3a38e7c85",
+              "name": "caption",
+              "value": "={{ $json.caption }}",
+              "type": "string"
+            },
+            {
+              "id": "3fbe788a-b193-49b7-916a-1951ef1ec60b",
+              "name": "mentions",
+              "value": "={{ $json.mentions }}",
+              "type": "array"
+            },
+            {
+              "id": "4d1824bd-7f5e-49f8-8e25-4274636ed6b1",
+              "name": "url",
+              "value": "={{ $json.url }}",
+              "type": "string"
+            },
+            {
+              "id": "47af53fa-0795-420b-b524-c8ce133166ed",
+              "name": "taggedUsers",
+              "value": "={{ $json.taggedUsers }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2048,
+        1056
+      ],
+      "id": "3e9cfdba-7cde-4840-a308-78669efd7526",
+      "name": "Get posts inforamtion"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M",
+          "mode": "list",
+          "cachedResultName": "Instagram profile scraper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1873790445,
+          "mode": "list",
+          "cachedResultName": "Sheet3",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit#gid=1873790445"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "caption"
+          ],
+          "schema": [
+            {
+              "id": "ownerUsername",
+              "displayName": "ownerUsername",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "caption",
+              "displayName": "caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "mentions",
+              "displayName": "mentions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "taggedUsers",
+              "displayName": "taggedUsers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2288,
+        1056
+      ],
+      "id": "c85b19a1-82cd-468c-9cea-9a21699e32af",
+      "name": "Store posts data",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ehr7EJjGTfd3Yh1Y",
+          "name": "Google Sheets account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M",
+          "mode": "list",
+          "cachedResultName": "Instagram profile scraper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1873790445,
+          "mode": "list",
+          "cachedResultName": "Sheet3",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit#gid=1873790445"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2656,
+        1024
+      ],
+      "id": "8d9a2b54-b184-4557-af13-e76d74922057",
+      "name": "Get stored posts data",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ehr7EJjGTfd3Yh1Y",
+          "name": "Google Sheets account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2880,
+        1024
+      ],
+      "id": "f7e4a310-9e7b-4c2a-a5a9-cc387859d98b",
+      "name": "Loop Over posts data"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import re\n\ndef to_list(raw):\n    # Already a list\n    if isinstance(raw, list):\n        return [str(v).strip() for v in raw if str(v).strip()]\n\n    # Convert anything else to string\n    s = \"\" if raw is None else str(raw).strip()\n    if not s:\n        return []\n\n    # Try extracting quoted values first: [\"a\" \"b\"] or [\"a\",\"b\"]\n    quoted = re.findall(r'[\"\\']([^\"\\']+)[\"\\']', s)\n    if quoted:\n        return [q.strip() for q in quoted if q.strip()]\n\n    # Fallback: remove brackets and split by newline/commas/whitespace\n    s = s.lstrip('[').rstrip(']')\n    s = s.replace('\\r', '\\n')\n    s = re.sub(r'\\s*\\n\\s*', ',', s)      # newlines -> commas\n    s = re.sub(r'\\s*,\\s*', ',', s)       # tidy commas\n    s = re.sub(r'\\s+', ',', s)           # any leftover spaces -> commas\n    parts = [p.strip().strip('\"').strip(\"'\") for p in s.split(',') if p.strip().strip('\"').strip(\"'\")]\n    return parts\n\nresults = []\nfor item in items:\n    raw = item[\"json\"].get(\"mention\", item[\"json\"].get(\"mentions\", \"\"))\n    vals = to_list(raw)\n\n    if not vals:\n        # DON'T SKIP: output a placeholder row\n        results.append({\"json\": {\"mention\": \"none\"}})\n    else:\n        for v in vals:\n            results.append({\"json\": {\"mention\": v}})\n\nreturn results\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3104,
+        1040
+      ],
+      "id": "a7c2b0a0-e1ac-4eef-b0f6-d151765fd820",
+      "name": "Data cleaning"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M",
+          "mode": "list",
+          "cachedResultName": "Instagram profile scraper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1446952797,
+          "mode": "list",
+          "cachedResultName": "Sheet4",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit#gid=1446952797"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "mention"
+          ],
+          "schema": [
+            {
+              "id": "mention",
+              "displayName": "mention",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3328,
+        1040
+      ],
+      "id": "d609c57a-6698-4136-a248-f050292b1146",
+      "name": "Profile handle data storing",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ehr7EJjGTfd3Yh1Y",
+          "name": "Google Sheets account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M",
+          "mode": "list",
+          "cachedResultName": "Instagram profile scraper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1446952797,
+          "mode": "list",
+          "cachedResultName": "Sheet4",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit#gid=1446952797"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3888,
+        1008
+      ],
+      "id": "75c5b2d0-fb62-4f5c-9759-851241a71cf2",
+      "name": "Get Profile handles data",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ehr7EJjGTfd3Yh1Y",
+          "name": "Google Sheets account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        4128,
+        1008
+      ],
+      "id": "aacd29d2-8cf7-4cb3-8739-8812f5fb5277",
+      "name": "Loop Over profile handles"
+    },
+    {
+      "parameters": {
+        "resource": "Datasets",
+        "datasetId": "={{ $json.defaultDatasetId }}",
+        "offset": {}
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        4560,
+        1024
+      ],
+      "id": "6cb029bc-2dc1-407f-829d-eeb374745a96",
+      "name": "Get dataset instagram account",
+      "credentials": {
+        "apifyApi": {
+          "id": "6iUM0owlL1ByKN38",
+          "name": "Apify account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M",
+          "mode": "list",
+          "cachedResultName": "Instagram profile scraper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MEnuIiMLNpk0xI7terdym8ODE0W6upFGcLcdlJFme9M/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "username"
+          ],
+          "schema": [
+            {
+              "id": "username",
+              "displayName": "username",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "biography",
+              "displayName": "biography",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fullName",
+              "displayName": "fullName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "followersCount",
+              "displayName": "followersCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "private",
+              "displayName": "private",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        5072,
+        992
+      ],
+      "id": "82c02e17-0c79-4663-a6d9-8eceee1692ba",
+      "name": "Store profile data",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ehr7EJjGTfd3Yh1Y",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "14027df7-d23e-4c2b-b669-56b14c32b316",
+              "name": "username",
+              "value": "={{ $json.username }}",
+              "type": "string"
+            },
+            {
+              "id": "42c669ca-0b50-40ae-8442-fb26716de341",
+              "name": "biography",
+              "value": "={{ $json.biography }}",
+              "type": "string"
+            },
+            {
+              "id": "5f352ade-c021-4704-bfaa-bfce59df2175",
+              "name": "fullName",
+              "value": "={{ $json.fullName }}",
+              "type": "string"
+            },
+            {
+              "id": "60ff2235-bb63-49c9-9cca-1bbe142be592",
+              "name": "followersCount",
+              "value": "={{ $json.followersCount }}",
+              "type": "number"
+            },
+            {
+              "id": "37d9b606-e581-4ffa-9beb-1f4939ed04db",
+              "name": "private",
+              "value": "={{ $json.private }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4784,
+        992
+      ],
+      "id": "c025ac0d-aeec-4ddf-b3df-5ca0f4d11d08",
+      "name": "Remapping account info fields"
+    },
+    {
+      "parameters": {
+        "actorId": {
+          "__rl": true,
+          "value": "https://console.apify.com/actors/dSCLg0C3YEZ83HzYX/input?addFromActorId=dSCLg0C3YEZ83HzYX",
+          "mode": "url"
+        },
+        "customBody": "={\n    \"usernames\": [\n        \"{{ $json.mention }}\"\n    ]\n}",
+        "timeout": {}
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        4336,
+        1024
+      ],
+      "id": "d7fef72e-dd26-4dbb-b535-ad7d687a63ab",
+      "name": "Scrape using Instagram handle",
+      "credentials": {
+        "apifyApi": {
+          "id": "6iUM0owlL1ByKN38",
+          "name": "Apify account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Step 1. Input Brand Pages\n\nNode: Pages Name (Set Node)\n\nPurpose: Holds the list of target Instagram pages to scrape (e.g. brand accounts).\n\nPin Data: A list of brand usernames like:\n\nsuss_pastry\nnoon.eg\nbrunchandcake.eg\n\n\nThese are the seed accounts — the workflow starts from them.",
+        "height": 592,
+        "width": 224
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1056,
+        624
+      ],
+      "typeVersion": 1,
+      "id": "f68a4c61-4aba-4f78-b50d-d3128a5a4f80",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "Step 2. Loop Through Brand Pages\n\nNode: Loop Over page names (Split In Batches)\n\nPurpose: Iterates through each brand page name one by one.\n\nReason: To avoid sending too many API requests at once and to handle each page separately.",
+        "height": 592,
+        "width": 224
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1296,
+        624
+      ],
+      "typeVersion": 1,
+      "id": "dce8d35f-10d2-4148-8ffd-38bb2d832b2d",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "Step 3. Scrape Brand’s Recent Posts\n\nNode: Page posts scraper (Apify Actor)\n\nActor: zTSjdcGqjg6KEIBlt (an Instagram Posts Scraper actor from Apify)\n\nParameters:\n\nusername: The current page being processed.\n\nresultsLimit: 30 — scrapes the latest 30 posts.\n\nPurpose: Fetches post data (captions, mentions, tagged users, URLs) from each brand’s page.",
+        "height": 592,
+        "width": 224
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1536,
+        624
+      ],
+      "id": "64261aa9-5fc9-44a3-90f0-98e808887999",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "Step 4. Get Dataset Results from Apify\n\nNode: Get dataset for posts (Apify)\n\nPurpose: After the scraper finishes, this node fetches the dataset results that Apify saved.\n\nOutput: JSON data containing posts, captions, mentions, and tags.",
+        "height": 592,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1776,
+        624
+      ],
+      "id": "519fee36-b9d5-4855-8869-9f824a0bdaaf",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "Step 5. Extract Useful Fields from Posts\n\nNode: Get posts information (Set Node)\n\nPurpose: Keeps only the relevant fields for analysis:\n\nownerUsername — who posted it\n\ncaption — post caption\n\nmentions — mentioned accounts\n\ntaggedUsers — tagged accounts\n\nurl — post link",
+        "height": 592,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        624
+      ],
+      "id": "5b1ef462-526d-4030-8466-8eb0f89e3cd1",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "Step 6. Store Posts Data (Optional / Disabled)\n\nNode: Store posts data (Google Sheets)\n\nPurpose: Saves post information into Google Sheets (Sheet3) for record-keeping.\n\nDisabled: Currently turned off, but can be enabled to track all scraped posts.",
+        "height": 592,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        624
+      ],
+      "id": "ece86219-fc20-4d26-bdbc-6b5844cefae5",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "Step 7. Get Stored Posts (Optional / Disabled)\n\nNode: Get stored posts data (Google Sheets)\n\nPurpose: Retrieves already stored posts from the sheet if needed (used in previous runs).\n\nDisabled: Currently not active.",
+        "height": 592,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2592,
+        624
+      ],
+      "id": "655580d2-a0ad-40c4-9a01-0ccbcc75c151",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "Step 8. Loop Over Posts\n\nNode: Loop Over posts data (Split In Batches)\n\nPurpose: Iterates over each post’s data to process its mentions and tagged users separately.",
+        "height": 592,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2816,
+        624
+      ],
+      "id": "e1164e86-e393-4bb8-939c-7e7ef747f313",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "Step 9. Clean Mentions Data\n\nNode: Data cleaning (Code Node — Python)\n\nPurpose:\nConverts messy or inconsistent “mentions” text into a clean list of usernames.\n\nHandles different input formats (lists, strings, brackets, quotes, newlines, etc.).\n\nIf no mentions are found, outputs \"mention\": \"none\" as placeholder.\n\nOutput: A clean dataset of influencer handles.",
+        "height": 592,
+        "width": 224
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3040,
+        624
+      ],
+      "id": "333f83b1-68ee-444d-b226-5500a35fba4b",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "Step 10. Store Handles\n\nNode: Profile handle data storing (Google Sheets)\n\nPurpose: Saves cleaned influencer handles to another sheet (Sheet4).\n\nEach Row: One unique mention (Instagram handle).\n\nDisabled: Optional node for storing intermediary data.",
+        "height": 592,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3280,
+        624
+      ],
+      "id": "6b767a95-768f-423e-b855-08ed05da8bb8",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "Step 11. Wait (Optional Control Node)\n\nNode: Wait\n\nPurpose: Used to pause workflow execution between loops or to manage rate limits.\n\nDisabled: Currently not active.",
+        "height": 592,
+        "width": 176
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3504,
+        624
+      ],
+      "id": "1770ab90-2d06-4309-adb2-62d5314a10fa",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "content": "Step 12. Retrieve Handles (Optional / Disabled)\n\nNode: Get Profile handles data (Google Sheets)\n\nPurpose: Loads the list of influencer handles previously saved to Sheet4.\n\nDisabled: Can be activated to continue from saved handles.",
+        "height": 592
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3808,
+        624
+      ],
+      "id": "f563d094-609d-40d5-8fdd-f19975ebd3d7",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "content": "Step 13. Loop Over Influencer Handles\n\nNode: Loop Over profile handles (Split In Batches)\n\nPurpose: Iterates through each influencer handle to scrape their profile info.",
+        "height": 592,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4064,
+        624
+      ],
+      "id": "71f3d959-47cf-4120-96d6-6e27129ed6ac",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "Step 15. Get Profile Dataset Results\n\nNode: Get dataset instagram account (Apify)\n\nPurpose: Retrieves scraped profile data (from Apify dataset).\n\nEnsures that: n8n waits for the actor to finish before proceeding.",
+        "height": 592,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4512,
+        624
+      ],
+      "id": "8eb74c53-be87-4d85-bbe6-a41b7a940ec2",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "content": "Step 16. Remap Profile Fields\n\nNode: Remapping account info fields (Set Node)\n\nPurpose: Cleans and renames fields from Apify results for clarity.\n\nMapped Fields:\n\nusername\nbiography\nfullName\nfollowersCount\nprivate (boolean)",
+        "height": 592
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4736,
+        624
+      ],
+      "id": "05e7fa51-06cc-4c9b-aa24-64032c694c8a",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "content": "Step 17. Store Influencer Data\n\nNode: Store profile data (Google Sheets)\n\nSheet: Sheet1 in Instagram profile scraper Google Sheet\n\nPurpose: Saves all influencer profile data for final analysis.\n\nColumns:\nUsername\nBiography\nFull Name\nFollowers Count\nPrivate (true/false)",
+        "height": 592,
+        "width": 262
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4992,
+        624
+      ],
+      "id": "527f4dd8-8497-41d2-8652-09eed707e375",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "content": "Step 14. Scrape Influencer Profile\n\nNode: Scrape using Instagram handle (Apify Actor)\n\nActor: dSCLg0C3YEZ83HzYX (Instagram Profile Scraper on Apify)\n\nParameters:\n\nusernames: the influencer handle.\n\nPurpose: Fetches public profile details — bio, full name, follower count, etc.",
+        "height": 592,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4288,
+        624
+      ],
+      "id": "65c78ff4-21ea-4f60-8240-e6cf9d7ff123",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "content": "### 🧩 **Part 1 – Scraping Brand Posts**\n\nThis section starts the workflow by collecting post data from selected **brand Instagram pages** using Apify.\nIt loops through each page, scrapes their most recent posts, extracts key information (caption, mentions, tags, and URL), and optionally saves the results to Google Sheets for tracking.\n\n**Main Purpose:**\nTo gather a clean dataset of brand posts that mention or tag influencers — these mentions will later be used to scrape influencer profiles.\n\n**Included Steps:**\n\n1. **Pages Name:** Defines the list of brand pages to scrape.\n2. **Loop Over Page Names:** Processes each page one at a time.\n3. **Page Posts Scraper:** Scrapes the latest 30 posts using Apify.\n4. **Get Dataset for Posts:** Retrieves the post data from Apify.\n5. **Get Posts Information:** Keeps only useful post fields (caption, mentions, tags, URL).\n6. **Store Posts Data (optional):** Saves the post data into Google Sheets for record-keeping.\n\n\n",
+        "height": 1008,
+        "width": 1456,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1024,
+        256
+      ],
+      "typeVersion": 1,
+      "id": "b0fd7acc-10a0-493a-abf9-e0ab1521bd35",
+      "name": "Sticky Note18"
+    },
+    {
+      "parameters": {
+        "content": "### 🧩 **Part 2 – Extracting and Cleaning Mentions**\n\nThis section processes scraped post data to extract, clean, and store influencer handles mentioned in brand posts.\nIt loops through each post, cleans raw mentions, and prepares a structured list of Instagram usernames for later scraping.\n\n**Main Purpose:**\nTo transform messy mentions from post data into a clean list of influencer handles ready for profile scraping.\n\n**Included Steps:**\n7. **Get Stored Posts (optional):** Reads previously saved post data from Google Sheets if needed.\n8. **Loop Over Posts:** Iterates through each post’s data to process mentions individually.\n9. **Clean Mentions Data:** Uses a Python code node to extract and normalize mention lists from various formats (arrays, text, brackets, quotes, etc.). Outputs “none” if empty.\n10. **Store Handles:** Saves each cleaned mention (Instagram handle) to a separate sheet in Google Sheets for later use.\n11. **Wait (optional):** Adds a delay between loops or actions to manage rate limits (currently disabled).\n",
+        "height": 1008,
+        "width": 1136,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2576,
+        256
+      ],
+      "typeVersion": 1,
+      "id": "622ea8dd-8679-404c-92d7-511f14c99f7a",
+      "name": "Sticky Note19"
+    },
+    {
+      "parameters": {
+        "content": "🧩 Part 3 – Scraping Influencer Profiles\n\nThis section takes the cleaned influencer handles and scrapes their public Instagram profile information.\nEach handle is processed in sequence, scraped via Apify, cleaned, and saved to the main Google Sheet for analysis.\n\nMain Purpose:\nTo collect structured influencer data (username, bio, full name, followers, privacy status) from the previously gathered mentions.\n\nIncluded Steps:\n12. Retrieve Handles (optional): Loads the saved influencer handles from Sheet4 for scraping.\n13. Loop Over Influencer Handles: Iterates through each influencer handle one by one.\n14. Scrape Influencer Profile: Uses an Apify Actor (dSCLg0C3YEZ83HzYX) to scrape profile info (username, bio, followers, etc.).\n15. Get Profile Dataset Results: Retrieves the completed Apify dataset once the scraper finishes.\n16. Remap Profile Fields: Renames and structures the scraped data into clean fields (username, biography, fullName, followersCount, private).\n17. Store Influencer Data: Saves all cleaned influencer profile data into the main Google Sheet (Sheet1) for final use or analysis.",
+        "height": 1008,
+        "width": 1504,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3792,
+        256
+      ],
+      "typeVersion": 1,
+      "id": "94bcf73a-d4c3-4ed9-9603-6d3c4c90ad49",
+      "name": "Sticky Note20"
+    },
+    {
+      "parameters": {
+        "content": "### 📸 **Instagram Influencer Scraper — Automated Workflow**\n\n#### **Purpose:**\n#### Automatically discover and collect influencer profiles from Instagram.\n##### The workflow starts with brand pages, scrapes their posts, extracts tagged or mentioned users, cleans them, and gathers full profile details — all saved to Google Sheets.\n\n#### ⚙️ **How It Works**\n\n1. Load a list of **brand Instagram usernames** (starting points).\n2. Loop through each brand and scrape **recent posts** using Apify.\n3. Extract **mentions** and **tagged users** from each post.\n4. Clean and organize the influencer handles list.\n5. Loop through each handle and scrape their **public profile info** (bio, followers, etc.).\n6. Save all influencer profiles to **Google Sheets**.\n\n### 🧩 **Node Descriptions**\n\n**1. Pages Name (Set)**📋 Holds the list of brand usernames to scrape.➡️ Example: `noon.eg`, `chefaa.egypt`, `brunchandcake.eg`.\n**2. Loop Over Page Names (Split In Batches)**🔁 Processes each brand page one by one.✅ Prevents overload and keeps the flow controlled.\n**3. Page Posts Scraper (Apify Actor)**📸 Scrapes up to 30 recent posts for each brand using Apify.🧠 Extracts: captions, mentions, tagged users, and post URLs.\n**4. Get Dataset for Posts (Apify)**📦 Fetches the scraped post dataset from Apify after each run.Ensures complete post data before moving forward.\n**5. Get Posts Information (Set)**📊 Keeps only the useful post fields:`ownerUsername`, `caption`, `mentions`, `taggedUsers`, `url`.\n**6. Data Cleaning (Code)**🧹 Cleans and formats mentions into clean, unique usernames.\nRemoves symbols, duplicates, and empty entries.\n**7. Loop Over Profile Handles (Split In Batches)**🔄 Loops through each influencer handle for detailed scraping.\n**8. Scrape Using Instagram Handle (Apify Actor)**🔍 Collects influencer profile data:\n`username`, `biography`, `fullName`, `followersCount`, and `private`.\n**9. Remapping Account Info Fields (Set)**🪄 Renames and structures the scraped profile fields for consistency.\n**10. Store Profile Data (Google Sheets)**📤 Saves influencer profile info to your connected Google Sheet.➡️ Default Sheet: `Sheet1` in **Instagram Profile Scraper** document.\n\n#### 🗂️ **Output**\n\nSheet   =>    Description                       \n🟩 **Sheet1**   =>      Final influencer profile info     \n🟦 **Sheet3**   =>      Posts scraped from brand accounts \n🟨 **Sheet4**   =>      Extracted influencer handles      \n\n## 🚀 **How To Use**\n\n1. Import the workflow into your **n8n workspace**.\n2. Add your **Apify** and **Google Sheets** credentials.\n3. Edit **Pages Name** node → add your brand usernames.\n4. Activate all Apify and Google Sheets nodes.\n5. Run the workflow — influencer profiles will be automatically fetched and saved.\n\n\n## 🧠 **Tips & Customization**\n\n* Change number of posts in **Page Posts Scraper** (`resultsLimit`).\n* Add filtering logic in **Code Node** to skip duplicates.\n* Store results by brand by adding a “Brand” column in **Store Profile Data**.\n* Extend workflow: send influencer lists via **Email**, **Telegram**, or **Airtable**.\n\n## 🪪 **Requirements**\n\n* 🔑 Active **Apify account** with Instagram scraper access.\n* 📄 Connected **Google Sheets credentials** in n8n.\n* 🌐 Instagram accounts must be **public** for scraping.\n\n\n",
+        "height": 1376,
+        "width": 5552,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -208,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "e269698b-723b-46e5-a22c-418f825a8c87",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {
+    "Pages Name": [
+      {
+        "json": {
+          "name": "suss_pastry"
+        }
+      },
+      {
+        "json": {
+          "name": "citrusmediasolutions"
+        }
+      },
+      {
+        "json": {
+          "name": "shopsivvi"
+        }
+      },
+      {
+        "json": {
+          "name": "telofill"
+        }
+      },
+      {
+        "json": {
+          "name": "noon.eg"
+        }
+      },
+      {
+        "json": {
+          "name": "kemitt.me"
+        }
+      },
+      {
+        "json": {
+          "name": "chefaa.egypt"
+        }
+      },
+      {
+        "json": {
+          "name": "defacto.egypt"
+        }
+      },
+      {
+        "json": {
+          "name": "brunchandcake.eg"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over posts data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pages Name": {
+      "main": [
+        [
+          {
+            "node": "Loop Over page names",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over page names": {
+      "main": [
+        [
+          {
+            "node": "Get stored posts data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Page posts scraper",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Page posts scraper": {
+      "main": [
+        [
+          {
+            "node": "Get dataset for posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get dataset for posts": {
+      "main": [
+        [
+          {
+            "node": "Get posts inforamtion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get posts inforamtion": {
+      "main": [
+        [
+          {
+            "node": "Store posts data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store posts data": {
+      "main": [
+        [
+          {
+            "node": "Loop Over page names",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get stored posts data": {
+      "main": [
+        [
+          {
+            "node": "Loop Over posts data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over posts data": {
+      "main": [
+        [
+          {
+            "node": "Get Profile handles data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Data cleaning",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data cleaning": {
+      "main": [
+        [
+          {
+            "node": "Profile handle data storing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Profile handle data storing": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Profile handles data": {
+      "main": [
+        [
+          {
+            "node": "Loop Over profile handles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over profile handles": {
+      "main": [
+        [
+          {
+            "node": "Remapping account info fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Scrape using Instagram handle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get dataset instagram account": {
+      "main": [
+        [
+          {
+            "node": "Loop Over profile handles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remapping account info fields": {
+      "main": [
+        [
+          {
+            "node": "Store profile data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape using Instagram handle": {
+      "main": [
+        [
+          {
+            "node": "Get dataset instagram account",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "",
+  "meta": {
+    "instanceId": "42e7a059891abee801d3209c5f3788d2bff0ccd72a43fc3e429d92455a855d27"
+  },
+  "tags": []
+}
