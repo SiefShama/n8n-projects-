@@ -1,0 +1,3217 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "Step 1 — Search Google Drive Files\n\nNode Name: 🗂️ Search Google Drive for Files\n\nPurpose: Retrieve every file from your connected Google Drive account to find spreadsheets.\n\nDetails:\nThis step lists all accessible files in your Google Drive, including their file IDs, names, and MIME types. It forms the initial dataset that the workflow will use to identify Google Sheets.\nExpected Output: A list of all files in your Drive, including non-spreadsheets.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2368,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "a77b4761-7a3e-4604-9742-f11176751776",
+      "name": "Sticky Note38"
+    },
+    {
+      "parameters": {
+        "content": "Step 2 — Filter Only Google Sheets\n\nNode Name: 📄 Filter Google Sheets Only\n\nPurpose: Keep only spreadsheet files with the Google Sheets MIME type.\n\nDetails:\nThis step filters the output from Step 1 and keeps only those files that are actual Google Sheets. It removes Google Docs, PDFs, and other file types that are not relevant.\nExpected Output: A clean list containing only Google Sheets files.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2656,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "0286e9f0-1260-4ef8-922d-e0a5c3584008",
+      "name": "Sticky Note39"
+    },
+    {
+      "parameters": {
+        "content": "Step 4 — Loop Through Each Spreadsheet\n\nNode Name: 🔁 Loop Sheets One by One\n\nPurpose: Process each spreadsheet individually in a controlled sequence.\n\nDetails:\nThis step creates a loop that handles one spreadsheet per iteration. It ensures the workflow processes files sequentially, preventing API overload and maintaining order.\nExpected Output: Each iteration contains data for one spreadsheet at a time.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3264,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "053d2bcb-2385-4f3d-9a02-8045c78dd527",
+      "name": "Sticky Note40"
+    },
+    {
+      "parameters": {
+        "content": "Step 3 (Optional) — Limit Sheets for Processing\n\nNode Name: ⚙️ Limit Sheets (Test Mode)\n\nPurpose: Restrict how many Google Sheets are processed in each workflow run to control testing and API quota usage.\n\nDetails:\nThis node limits the number of spreadsheet files passed to the next steps. It is mainly used for testing or debugging. When you are ready for full production runs, disable or increase this limit.\n\nExpected Output: A smaller, manageable subset of spreadsheets for testing.",
+        "height": 576,
+        "width": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2944,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "0688c0d3-bb54-4bcc-8cb7-262d87e709e6",
+      "name": "Sticky Note41"
+    },
+    {
+      "parameters": {
+        "content": "Step 9 — Get Master Sheet Data\n\nNode Name: 📋 Fetch Existing Collection Data\n\nPurpose: Retrieve the existing rows from the “Sheet Collection” master tracker.\n\nDetails:\nThis step loads the current data from the master Google Sheet to check how many rows already exist. It prevents duplicates and ensures new tabs are added in sequence.\n\nExpected Output: The current dataset of all previously collected tab entries.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4704,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "e1a8c720-e6cf-425b-b766-0998bbb74b20",
+      "name": "Sticky Note42"
+    },
+    {
+      "parameters": {
+        "content": "Step 8 — Loop Through Tabs\n\nNode Name: 🔁 Loop Tabs Within Each Spreadsheet\n\nPurpose: Process each tab individually inside the spreadsheet.\n\nDetails:\nThis loop runs once per tab found inside each spreadsheet. It allows the workflow to create a unique record for every single tab across all spreadsheets in your Google Drive.\n\nExpected Output: Each iteration represents one tab of one spreadsheet.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4416,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "a44245bb-39f1-4345-bcbc-a8b9bc59a509",
+      "name": "Sticky Note43"
+    },
+    {
+      "parameters": {
+        "content": "Step 7 (Optional) — Wait Between Spreadsheet Loops\n\nNode Name: ⏱️ Wait Before Next Spreadsheet\n\nPurpose: Add a small delay before continuing to the next spreadsheet.\n\nDetails:\nThis optional step introduces a short wait time between API calls to avoid hitting Google API rate limits. It is useful when processing many spreadsheets in one run.\n\nExpected Output: A controlled delay between spreadsheet iterations.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4128,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "c5998aa4-15c8-46b4-a0cb-6af9ed8e769d",
+      "name": "Sticky Note44"
+    },
+    {
+      "parameters": {
+        "content": "Step 6 — Extract Tab Details\n\nNode Name: 🧮 Extract Tab Names from Spreadsheet\n\nPurpose: Extract and prepare tab details from the spreadsheet metadata.\n\nDetails:\nThis step reads the metadata from the previous step and extracts the spreadsheet ID, spreadsheet name, and tab names. Each tab is turned into a separate record, meaning one spreadsheet becomes multiple tab entries.\n\nExpected Output: One output per tab, with spreadsheetId, spreadsheetName, and tabName.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3840,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "76a81b71-f3a0-4b81-b5de-a45eaa88c358",
+      "name": "Sticky Note45"
+    },
+    {
+      "parameters": {
+        "content": "Step 5 — Get Spreadsheet Metadata\n\nNode Name: 🌐 Fetch Spreadsheet Metadata (API Call)\n\nPurpose: Retrieve information about the structure of the current spreadsheet.\n\nDetails:\nThis step calls the Google Sheets API to fetch spreadsheet metadata such as spreadsheet ID, spreadsheet name, tab (sheet) names, and their IDs. The response includes a full list of all tabs inside that file.\n\nExpected Output: A JSON object containing the full details and structure of one spreadsheet.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3552,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "4d7ef40f-91b6-4377-b4de-e2da89aa13f4",
+      "name": "Sticky Note46"
+    },
+    {
+      "parameters": {
+        "content": "Step 12 — Prepare Final Tab Record\n\nNode Name: 🧩 Assemble Final Tab Record\n\nPurpose: Format and flatten the tab record for writing to Google Sheets.\n\nDetails:\nThis step ensures all data fields are properly formatted and flattened into a single JSON object. It removes nested objects or extra fields that could cause structure errors when writing.\n\nExpected Output: A single, clean JSON record ready for Google Sheets insertion.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        5568,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "0e9a7b9c-f13f-4071-8a98-9126888e1402",
+      "name": "Sticky Note47"
+    },
+    {
+      "parameters": {
+        "content": "Step 11 — Merge Tab and Counter Data\n\nNode Name: 🔗 Combine Tab Info with Counter\n\nPurpose: Merge the tab details with the generated count number.\n\nDetails:\nThis step combines all tab details (spreadsheet ID, spreadsheet name, tab name) with the generated counter number into a single structured data object. This prepares it for writing to the collection sheet.\n\nExpected Output: A complete record that contains all final tab information and its unique number.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        5280,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "7541d691-df3c-40cd-93af-2d4a60fc9757",
+      "name": "Sticky Note48"
+    },
+    {
+      "parameters": {
+        "content": "Step 10 — Generate Next Tab Count\n\nNode Name: 🔢 Generate Next Tab Counter\n\nPurpose: Generate a new incremental counter number for each tab record.\n\nDetails:\nThis step looks at the number of existing rows in the collection sheet and calculates the next count value by adding one. It ensures that every new tab has a unique sequential number.\n\nExpected Output: A numeric counter value, such as 37, for the next tab entry.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4992,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "4355751a-45ea-441f-b165-9b2983c65e2d",
+      "name": "Sticky Note49"
+    },
+    {
+      "parameters": {
+        "content": "Step 13 — Append Tab Record to Collection Sheet\n\nNode Name: 📘 Append to Master Sheet Collection\n\nPurpose: Add each tab record into the master “Sheet Collection” Google Sheet.\n\nDetails:\nThis step writes one row for each tab found. Each row includes the following columns: count_tabName, spreadsheetId, spreadsheetName, and tabName. It builds your official index of all tabs across your Drive.\n\nExpected Output: New row(s) added to your master “Sheet Collection” tracker sheet.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        5856,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "3e2a5887-747d-46f7-955a-c289ec99f2b9",
+      "name": "Sticky Note50"
+    },
+    {
+      "parameters": {
+        "content": "Step 14 (Optional) — Wait Before Next Batch\n\nNode Name: ⏳ Wait Before Next Cycle (Disabled)\n\nPurpose: Add an optional delay after completing one processing cycle.\n\nDetails:\nThis optional step helps control pacing for large or continuous workflows. It can be enabled to pause before the next group of spreadsheets is processed. Disabled by default for faster runs.\n\nExpected Output: A timed delay, no data changes.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        6144,
+        656
+      ],
+      "typeVersion": 1,
+      "id": "3e1d9e67-0d27-4134-8cac-134005e4f8b9",
+      "name": "Sticky Note51"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "whatToSearch": "files",
+          "includeTrashed": false
+        },
+        "options": {
+          "fields": [
+            "mimeType",
+            "id",
+            "name"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2464,
+        1072
+      ],
+      "id": "4bdba782-ba4d-4b9e-87fd-693eb510748b",
+      "name": "Search Google Drive Files",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "AG0ZV4fMVkHhgdg6",
+          "name": "Google Drive account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "fad642ee-cb11-4aac-8198-40ce63ac8cfe",
+              "leftValue": "={{ $json.mimeType }}",
+              "rightValue": "application/vnd.google-apps.spreadsheet",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2752,
+        1072
+      ],
+      "id": "4fc6ee86-22f2-4508-8206-d77e90cf4225",
+      "name": "Filter Only Google Sheets"
+    },
+    {
+      "parameters": {
+        "jsCode": "const file = $json;\nconst spreadsheetId = file.spreadsheetId;\nconst spreadsheetName = file.properties.title;\n\nconst results = [];\n\nfor (let i = 0; i < (file.sheets || []).length; i++) {\n  const sheet = file.sheets[i];\n  const tabName = sheet?.properties?.title;\n\n  if (tabName) {\n    results.push({\n      spreadsheetId,\n      spreadsheetName,\n      tabName,\n    });\n  }\n}\n\nreturn results;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3920,
+        1072
+      ],
+      "id": "5f1ad40a-23bd-40fb-bde5-cc2c59ec3dd9",
+      "name": "Extract Tab Names from Spreadsheet",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{$json[\"id\"]}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3632,
+        1072
+      ],
+      "id": "ba0d63b8-c89f-40da-81f2-670df9aebe9c",
+      "name": "Get Spreadsheet Metadata",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleOAuth2Api": {
+          "id": "EqFd9EyowzlZ7ZdS",
+          "name": "Google account"
+        },
+        "googleDriveOAuth2Api": {
+          "id": "AG0ZV4fMVkHhgdg6",
+          "name": "Google Drive account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3344,
+        1056
+      ],
+      "id": "3d5b6965-f8f8-4e0d-b9e7-f5f5af00a8b4",
+      "name": "Loop Through Each Spreadsheet"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        3056,
+        1056
+      ],
+      "id": "c5a66d91-3f41-41f4-965c-91b90be9256b",
+      "name": "Limit Sheets for Processing",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4224,
+        1072
+      ],
+      "id": "ef804ec4-89d6-4ca6-ab95-04d07bc1fa49",
+      "name": "Wait Between Spreadsheet Loops",
+      "webhookId": "0c3c5940-d8f7-482e-9195-a1adcf1c9318",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        4496,
+        1040
+      ],
+      "id": "272f3abd-426e-467f-a66e-aaeeca7b61e6",
+      "name": "Loop Through Tabs"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw",
+          "mode": "list",
+          "cachedResultName": "Sheet collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet filter",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        4800,
+        1056
+      ],
+      "id": "a8f0369c-c6ef-4d5f-b31e-e912e8818459",
+      "name": "Get Master Sheet Data",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get all rows from Google Sheets\nconst items = $input.all();\n\n// Extract all count_tabName values (convert strings to numbers safely)\nconst counts = items\n  .map(item => {\n    const val = item.json.count_tabName;\n    if (val === undefined || val === null || val === \"\") return null;\n    const num = Number(val);\n    return isNaN(num) ? null : num;\n  })\n  .filter(v => v !== null);\n\n// If there are no valid numbers, start with 1\nif (counts.length === 0) {\n  return [{ json: { count_tabName: 1 } }];\n}\n\n// Find the max count and increment by 1\nconst maxCount = Math.max(...counts);\nconst newCount = maxCount + 1;\n\n// Output only the new count value\nreturn [{ json: { count_tabName: newCount } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5088,
+        1056
+      ],
+      "id": "360f96cb-930d-4c07-9278-393f71529229",
+      "name": "Generate Next Tab Count"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        5376,
+        1072
+      ],
+      "id": "321f110e-9aae-46b4-9f37-2b20d02e6e73",
+      "name": "Merge Tab and Counter Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get all incoming items (each may have .json data)\nconst items = $input.all();\n\n// Extract JSON data from each item\nconst list = items.map(item => item.json);\n\n// Merge all objects together\nconst merged = Object.assign({}, ...list);\n\n// Return as one output item\nreturn [{ json: merged }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5648,
+        1072
+      ],
+      "id": "4a7f0839-ff66-499f-9f52-74cbef8f8207",
+      "name": "Prepare Final Tab Record"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw",
+          "mode": "list",
+          "cachedResultName": "Sheet collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet filter",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "count_tabName",
+              "displayName": "count_tabName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "spreadsheetId",
+              "displayName": "spreadsheetId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "spreadsheetName",
+              "displayName": "spreadsheetName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tabName",
+              "displayName": "tabName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        5952,
+        1072
+      ],
+      "id": "08bc4203-0d2d-443a-b761-783a74850f9c",
+      "name": "Append Tab Record to Collection Sheet",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        6224,
+        1072
+      ],
+      "id": "3fec8f14-a6fd-4496-8fa7-9525c9d013a4",
+      "name": "Wait Before Next Batch",
+      "webhookId": "5c5bc205-0eb1-4116-838d-35a1072a6f97",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "### 🧩 **Part 1 – Google Sheets Collector**\n\nThis section of the workflow scans your **Google Drive** to find all Google Sheets files, extracts each sheet’s **tab names**, and builds a complete index in a master file called **“Sheet Collection.”**\nIt organizes every spreadsheet and its internal tabs into a structured list — forming the foundation for future data mapping and automation in later workflow parts.\n\n**Main Purpose:**\nTo automatically detect every Google Sheet and its tabs across your connected Drive, and store them in a single, organized “Sheet Collection” tracker for easy reference and future use.\n\n**Included Steps:**\n\n1. **Search Google Drive Files:** Lists all files from the connected Drive.\n2. **Filter Only Google Sheets:** Keeps only files of the Google Sheets type.\n3. **Limit Sheets (optional):** Restricts how many sheets are processed during testing.\n4. **Loop Through Each Spreadsheet:** Processes one sheet at a time.\n5. **Get Spreadsheet Metadata:** Fetches sheet structure and tab details from Google’s API.\n6. **Extract Tab Names:** Pulls each tab name and prepares it as a separate record.\n7. **Wait Between Sheets (optional):** Adds a short pause to avoid API limits.\n8. **Loop Through Tabs:** Processes every tab individually inside each spreadsheet.\n9. **Get Master Collection Sheet:** Loads the current data from the “Sheet Collection.”\n10. **Generate Next Tab Counter:** Creates a sequential number for the new tab.\n11. **Merge Tab Data and Counter:** Combines the tab info with its unique count.\n12. **Prepare Final Tab Record:** Formats and cleans the tab record for output.\n13. **Append to Master Sheet:** Adds each new tab record to the “Sheet Collection.”\n14. **Wait Before Next Batch (optional):** Delays the next run if needed for pacing.\n\n**Notes & Tips:**\nKeep the optional “Limit” and “Wait” nodes active during early testing to prevent Google API errors.\nEnsure your master “Sheet Collection” file is already created and contains the correct column headers before running.\nIf new spreadsheets or tabs are added later in Drive, re-run this part to refresh the index automatically.\nFor better performance, separate this workflow from later parts until all sheet and tab data are fully collected and verified.\n\n",
+        "height": 1264,
+        "width": 4096,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2352,
+        16
+      ],
+      "typeVersion": 1,
+      "id": "5b2b9e6b-0138-4dde-a32d-599197c16509",
+      "name": "Sticky Note22"
+    },
+    {
+      "parameters": {
+        "content": "Step 1 — Get Filtered Sheet List\n\nNode Name: 📋 Get Sheets to Process\n\nPurpose: Load the filtered list of spreadsheet and tab combinations from the “Sheet Collection” file.\n\nDetails:\nThis node reads rows from the master sheet (created in Part 1) to know which spreadsheets and tabs need to be analyzed for headers. It acts as the input source for this part.\n\nExpected Output: A structured list of spreadsheet IDs and tab names that will go through header detection.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3216,
+        1712
+      ],
+      "typeVersion": 1,
+      "id": "f7e2d0c9-ce8f-493e-81e3-22c06934348e",
+      "name": "Sticky Note52"
+    },
+    {
+      "parameters": {
+        "content": "Step 4 — Read Tab Data\n\nNode Name: 📄 Get Google Sheet Tab Data\n\nPurpose: Retrieve the first few rows from each tab to detect headers.\n\nDetails:\nThis node connects to Google Sheets and fetches data for the current tab (defined by spreadsheet ID and tab name). The first few rows are analyzed to determine whether they contain headers or raw data.\n\nExpected Output: A small sample of tab data, usually 2–3 rows, ready for header mapping.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4080,
+        1712
+      ],
+      "typeVersion": 1,
+      "id": "ef895653-3af0-4587-967f-af96aefdee6e",
+      "name": "Sticky Note53"
+    },
+    {
+      "parameters": {
+        "content": "Step 3 — Loop Through Each Tab\n\nNode Name: 🔁 Loop Over Tabs\n\nPurpose: Process each tab of every spreadsheet individually.\n\nDetails:\nThis looping mechanism goes through each tab one by one to safely read headers and detect their structures. It helps maintain accuracy while avoiding API throttling.\n\nExpected Output: One tab’s data at a time passed into the next step.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3792,
+        1712
+      ],
+      "typeVersion": 1,
+      "id": "30b3066b-c793-4831-b562-6a9899265464",
+      "name": "Sticky Note54"
+    },
+    {
+      "parameters": {
+        "content": "Step 2 — Conditional Check for Empty Mappings\n\nNode Name: ⚖️ Check If Mapping Data Exists\n\nPurpose: Ensure there are valid tab entries before starting the main loop.\n\nDetails:\nThe condition node verifies that each entry includes proper spreadsheet and tab references. If none exist, it skips processing to avoid errors or empty loops.\n\nExpected Output: Only valid records with proper tab names and spreadsheet IDs continue to the next step.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3504,
+        1712
+      ],
+      "typeVersion": 1,
+      "id": "ec35988a-9f80-459e-a9e5-11e7b54c1f73",
+      "name": "Sticky Note55"
+    },
+    {
+      "parameters": {
+        "content": "Step 7 — Deep Merge Results\n\nNode Name: 🧩 Merge in JavaScript\n\nPurpose: Consolidate data from all paths and prevent overwriting important fields.\n\nDetails:\nThis Code node performs a deep merge on all collected tab data, ensuring nested objects and arrays are combined properly. It only overwrites fields that have valid non-empty data.\n\nExpected Output: A single, clean merged object containing all processed tab mappings.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4944,
+        1712
+      ],
+      "typeVersion": 1,
+      "id": "280d2e0b-f1b0-4b03-b7fb-13417e008e17",
+      "name": "Sticky Note56"
+    },
+    {
+      "parameters": {
+        "content": "Step 6 — Merge Tab Metadata\n\nNode Name: 🔗 Merge Tab Info\n\nPurpose: Combine tab details (spreadsheet ID, tab name) with the detected header mapping.\n\nDetails:\nThis step merges the original sheet and tab information with the output from the header detection node, producing a complete record for each tab with headers included.\n\nExpected Output: Unified tab objects containing sheet details and standardized header mappings.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4656,
+        1712
+      ],
+      "typeVersion": 1,
+      "id": "fd23059e-ed5a-4d5d-8f20-d4994fcc8991",
+      "name": "Sticky Note57"
+    },
+    {
+      "parameters": {
+        "content": "Step 5 — Detect and Map Headers\n\nNode Name: 🧠 Header Detection Code\n\nPurpose: Automatically identify header rows and map them to standardized master fields.\n\nDetails:\nThis Code node uses a built-in list of known master headers and a large synonym dictionary. It compares the first and second rows to detect the actual header row and outputs headerRow, mappedHeaders, and dataRow.\n\nExpected Output: For each tab, detected header information and mapped standardized field names.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4368,
+        1712
+      ],
+      "typeVersion": 1,
+      "id": "93f8cd9b-89ed-470a-9727-cd3877d9ce59",
+      "name": "Sticky Note58"
+    },
+    {
+      "parameters": {
+        "content": "Step 9 (Optional) — Wait Between Tabs\n\nNode Name: ⏳ Wait (Delay)\n\nPurpose: Pause briefly between batches to avoid hitting Google API rate limits.\n\nDetails:\nA short delay (3–5 seconds) helps prevent API throttling, especially when processing many spreadsheets. Disable this once testing is complete or if you’re running at low volume.\n\nExpected Output: Controlled workflow pacing and reliable API performance.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        5520,
+        1712
+      ],
+      "typeVersion": 1,
+      "id": "482596f7-735f-4fc6-ae23-c7babf07c773",
+      "name": "Sticky Note59"
+    },
+    {
+      "parameters": {
+        "content": "Step 8 — Update Master Collection Sheet\n\nNode Name: 📘 Append or Update Sheet Collection\n\nPurpose: Save the detected headers and mapping results back into the “Sheet Collection” tracker.\n\nDetails:\nThis node updates each tab’s row with the header row number, mapped header list, and data start row. If a record already exists, it updates it; otherwise, it appends a new one.\n\nExpected Output: The “Sheet Collection” file is now enriched with header details for every tab.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        5232,
+        1712
+      ],
+      "typeVersion": 1,
+      "id": "40da3488-1094-4580-8122-b0f7ead9d21f",
+      "name": "Sticky Note60"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw",
+          "mode": "list",
+          "cachedResultName": "Sheet collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet filter",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3312,
+        2128
+      ],
+      "id": "04ac2a06-fb44-43e1-b87b-18f17baa4713",
+      "name": "Get Filtered Sheet List",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c028f113-f87c-48f4-aa02-e833e0ffa921",
+              "leftValue": "={{ $json.mappedHeaders }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3584,
+        2128
+      ],
+      "id": "aab5e386-ba36-4c00-975e-67d5fa10761d",
+      "name": "Conditional Check for Empty Mappings"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3872,
+        2112
+      ],
+      "id": "35beba57-0a23-4d9c-b792-f56245ce4e9b",
+      "name": "Loop Through Each Tab"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json.tabName }}",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        4176,
+        2128
+      ],
+      "id": "52fd6b36-ffab-4aeb-9556-139be90caf57",
+      "name": "Read Tab Data",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * n8n Code Node\n * Detect headers using synonyms\n * Output: { headerRow, mappedHeaders, dataRow }\n */\n/*******************************\n * 1) EXACT MASTER HEADERS (order & case preserved)\n *******************************/\nconst BIG_HEADERS = [\n  \"INF Name\",\"Social Followers\",\"Contact\",\"Social handle\",\"Social Link\",\"Bio\",\"Communication Point\",\n  \"Content category\",\"Account Manager\",\"Gender\",\"Address\",\"City\",\"Country\",\"Nationality\",\"Social Class\",\n  \"Head Style\",\"Hair Type\",\"Rate Card\",\"Negotiated Rates\",\"Email\",\"Phone\",\"What'sapp Api\",\"Content Quality\",\n  \"Face Style\",\"Age/Age Group\",\"Birth Date\",\"Portofolio\",\"Comment\",\"Commitment\",\"Accreditiations\",\n  \"No. of Kids\",\"No. of Siblings\",\"No. of nephews\",\"Bank Details\",\"Type of Collabs\",\"Attachements\",\n  \"Brand/Merch\",\"Languages\",\"First Update\",\"Last Update\",\"Parent\",\"Kid\",\"Place\",\"Image Link\",\n  \"Quality of Content\",\"Skin / Body\",\"Skin Type\",\"Skin Concerns\",\"Specialization\",\"UGC Creator\",\n  \"Media Buying\",\"Deliverables\",\"Cost\",\"Link\",\"Platform\",\"Extra data\",\"Communication Point\",\n  \"Social Handle\",\"Social Followers\" // 🔧 added merged fields\n];\n\n/********************************************\n * 2) SYNONYMS (keys are the master headers; values are lowercase aliases)\n ********************************************/\nconst SYNONYMS = {\n  \"INF Name\": [\"inf name\",\"influencer\",\"influencer name\",\"name\",\"full name\",\"creator name\",\"inf\"],\n  \"Social Followers\": [\"followers\",\"follower count\",\"audience\",\"audience size\",\"subs\",\"subscribers\",\"total followers\",\"num of followers\",\"follower\",\"instagram followers\",\"ig followers\",\"insta followers\",\"instagram audience\",\"followers on instagram\",\"tiktok followers\",\"tt followers\",\"followers on tiktok\",\"tiktok audience\",\"social followers\",\"all followers\",\"audience total\",\"number of followers\"],\n  \"Social handle\" :[\"instagram handle\",\"instagram\",\"ig\",\"ig handle\",\"insta\",\"instagram username\",\"ig username\",\"handle\",\"ig handel\",\"insta handle\",\"handel\",\"inf instagram name\",\"clean handle\",\"tiktok handle\",\"tiktok\",\"tt handle\",\"tt\",\"tiktok username\",\"tiktok id\",\"tiktok handel\",\"social handle\",\"handles\",\"profiles\"],\n  \"Social Link\" :[\"instagram link\",\"ig link\",\"insta link\",\"instagram profile\",\"profile link\",\"instagram url\",\"ig url\",\"tiktok link\",\"tt link\",\"tiktok profile\",\"tiktok url\",\"youtube link\",\"yt link\",\"youtube\",\"channel link\",\"youtube channel\",\"youtube url\",\"yt\",\"facebook link\",\"fb link\",\"facebook\",\"facebook profile\",\"fb profile\",\"facebook url\",\"fb\"],\n  \"Contact\": [\"contact\",\"contacts\",\"contact info\",\"contact details\",\"reach\",\"phone/email\",\"number\"],\n  \"Bio\": [\"bio\",\"biography\",\"about\",\"about me\",\"description\",\"profile bio\"],\n  \"Communication Point\": [\"communication point\",\"comms\",\"main contact\",\"point of contact\",\"poc\"],\n  \"Content category\": [\"content category\",\"category\",\"niche\",\"topic\",\"content type\",\"website category\",\"field\",\"content\"],\n  \"Account Manager\": [\"account manager\",\"manager\",\"acc manager\",\"am\",\"owner (internal)\"],\n  \"Gender\": [\"gender\",\"sex\",\"male/female\"],\n  \"Address\": [\"address\",\"location\",\"street\",\"home address\"],\n  \"City\": [\"city\",\"town\",\"municipality\"],\n  \"Country\": [\"country\",\"nation\",\"state\"],\n  \"Nationality\": [\"nationality\",\"citizenship\",\"origin\"],\n  \"Social Class\": [\"social class\",\"class\",\"socioeconomic class\",\"status\"],\n  \"Head Style\": [\"head style\",\"headwear\",\"hair style head\",\"head type\",\"hairstyle\"],\n  \"Hair Type\": [\"hair type\",\"hair texture\",\"hair\"],\n  \"Rate Card\": [\"rate card\",\"pricing\",\"rates\",\"fees\",\"price list\"],\n  \"Negotiated Rates\": [\"negotiated rates\",\"final rates\",\"deal price\",\"discounted rates\",\"agreed rates\"],\n  \"Email\": [\"email\",\"mail\",\"e-mail\",\"email address\"],\n  \"Phone\": [\"phone\",\"telephone\",\"mobile\",\"cell\",\"phone number\",\"mobile number\"],\n  \"What'sapp Api\": [\"whatsapp\",\"whatsapp api\",\"whats app\",\"wa\",\"whatsapp number\"],\n  \"Content Quality\": [\"content quality\",\"quality\",\"post quality\",\"production quality\"],\n  \"Face Style\": [\"face style\",\"face shape\",\"appearance\"],\n  \"Age/Age Group\": [\"age\",\"age group\",\"age range\",\"years\",\"demographic\"],\n  \"Birth Date\": [\"birth date\",\"dob\",\"date of birth\",\"birthday\"],\n  \"Portofolio\": [\"portofolio\",\"portfolio\",\"work samples\",\"media kit\"],\n  \"Comment\": [\"comment\",\"remarks\",\"notes\",\"note\"],\n  \"Commitment\": [\"commitment\",\"availability\",\"dedication\"],\n  \"Accreditiations\": [\"accreditiations\",\"accreditations\",\"certifications\",\"awards\",\"credentials\"],\n  \"No. of Kids\": [\"no. of kids\",\"kids\",\"children\",\"kids count\",\"children count\"],\n  \"No. of Siblings\": [\"no. of siblings\",\"siblings\",\"brothers/sisters\",\"siblings count\"],\n  \"No. of nephews\": [\"no. of nephews\",\"nephews\",\"nieces and nephews\",\"nephew count\"],\n  \"Bank Details\": [\"bank details\",\"bank\",\"account number\",\"iban\",\"bank info\"],\n  \"Type of Collabs\": [\"type of collabs\",\"collab type\",\"collaboration type\",\"partnership type\",\"collab kind\"],\n  \"Attachements\": [\"attachements\",\"attachments\",\"files\",\"docs\",\"documents\"],\n  \"Brand/Merch\": [\"brand/merch\",\"brand\",\"merch\",\"merchandise\",\"brand name\"],\n  \"Languages\": [\"languages\",\"language\",\"spoken languages\",\"spoken language\"],\n  \"First Update\": [\"first update\",\"created at\",\"initial date\",\"start date\",\"created date\"],\n  \"Last Update\": [\"last update\",\"updated at\",\"modified\",\"edit date\",\"update date\"],\n  \"Parent\": [\"parent\",\"guardian\",\"mother\",\"father\"],\n  \"Kid\": [\"kid\",\"child\",\"son\",\"daughter\"],\n  \"Place\": [\"place\",\"venue\",\"location\",\"area\"],\n  \"Image Link\": [\"image link\",\"image\",\"photo\",\"picture\",\"profile pic\",\"image url\",\"photo link\"],\n  \"Quality of Content\": [\"quality of content\",\"content quality\",\"qc\",\"overall quality\"],\n  \"Skin / Body\": [\"skin / body\",\"skin\",\"body\",\"body type\"],\n  \"Skin Type\": [\"skin type\",\"complexion\",\"skin category\"],\n  \"Skin Concerns\": [\"skin concerns\",\"skin issues\",\"skin problems\",\"skin condition\",\"concerns\"],\n  \"Specialization\": [\"specialization\",\"speciality\",\"specialty\",\"expertise\",\"focus area\"],\n  \"UGC Creator\": [\"ugc creator\",\"ugc\",\"user generated content\",\"ugc talent\"],\n  \"Media Buying\": [\"media buying\",\"ads\",\"paid media\",\"advertising\",\"ad buying\"],\n  \"Deliverables\": [\"deliverables\",\"output\",\"deliveries\",\"content deliverables\",\"submission\"],\n  \"Cost\": [\"cost\",\"price\",\"total cost\",\"amount\",\"budget\",\"value\"],\n  \"Link\": [\"link\",\"url\",\"hyperlink\",\"reference link\"],\n  \"Platform\": [\"platform\",\"social platform\",\"channel\",\"media platform\"],\n  \"Extra data\": [\"extra data\",\"extra\",\"misc\",\"additional info\",\"notes extra\"]\n};\n\n// Reverse lookup map\nconst lookup = {};\nfor (const [canonical, synonyms] of Object.entries(SYNONYMS)) {\n  for (const s of synonyms) lookup[s.toLowerCase()] = canonical;\n  lookup[canonical.toLowerCase()] = canonical;\n}\n\n// Input rows\nconst rows = items.map(i => i.json);\n\n// --- Condition: Empty input ---\nif (!rows.length) {\n  return [{\n    json: {\n      headerRow: \"none\",\n      mappedHeaders: [],\n      dataRow: \"none\"\n    }\n  }];\n}\n\n// ---- Check row 1 (keys as headers) ----\nconst keysRow1 = Object.keys(rows[0] || {}).map(k => k.toLowerCase());\nconst matchCount1 = keysRow1.filter(k => lookup[k]).length;\n\nif (matchCount1 >= 2) {\n  const mappedHeaders = keysRow1.map(k => lookup[k] || k);\n  return [{\n    json: {\n      headerRow: 1,\n      mappedHeaders,\n      dataRow: 2\n    }\n  }];\n}\n\n// ---- Check row 2 (values of first row as headers) ----\nconst valuesRow1 = Object.values(rows[0] || {}).map(v => String(v || \"\").toLowerCase());\nconst matchCount2 = valuesRow1.filter(v => lookup[v]).length;\n\nif (matchCount2 >= 2) {\n  const mappedHeaders = valuesRow1.map(v => lookup[v] || v);\n  return [{\n    json: {\n      headerRow: 2,\n      mappedHeaders,\n      dataRow: 3\n    }\n  }];\n}\n\n// ---- No headers detected ----\nreturn [{\n  json: {\n    headerRow: \"none\",\n    mappedHeaders: [],\n    dataRow: \"none\"\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4464,
+        2128
+      ],
+      "id": "dad09a86-3fae-4ced-9966-4dfaddf9a5bb",
+      "name": "Detect and Map Headers"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4752,
+        2144
+      ],
+      "id": "8d2273f2-45ee-4061-8f9d-6de5ed21dcd8",
+      "name": "Merge Tab Metadata"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get all incoming items (each may have .json data)\nconst items = $input.all();\n\n// Extract JSON data from each item\nconst list = items.map(item => item.json);\n\n// Deep merge function that handles nested objects & arrays\nfunction deepMerge(target, source) {\n  for (const key of Object.keys(source)) {\n    const srcVal = source[key];\n    const tgtVal = target[key];\n\n    if (Array.isArray(srcVal)) {\n      // Merge arrays\n      target[key] = Array.isArray(tgtVal)\n        ? [...tgtVal, ...srcVal]\n        : [...srcVal];\n    } else if (srcVal && typeof srcVal === \"object\") {\n      // Merge nested objects\n      target[key] = deepMerge(\n        tgtVal && typeof tgtVal === \"object\" ? tgtVal : {},\n        srcVal\n      );\n    } else if (srcVal !== \"\" && srcVal !== null && srcVal !== undefined) {\n      // Overwrite only if source has a non-empty value\n      target[key] = srcVal;\n    }\n  }\n  return target;\n}\n\n// Merge all objects in the list\nconst merged = list.reduce((acc, obj) => deepMerge(acc, obj), {});\n\n// Return the final merged object\nreturn [{ json: merged }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5024,
+        2144
+      ],
+      "id": "b5798ed9-5abc-46d3-aa36-0ea9e5ba8d6d",
+      "name": "Deep Merge Results"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw",
+          "mode": "list",
+          "cachedResultName": "Sheet collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet filter",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "tabName": "={{ $json.tabName }}",
+            "spreadsheetName": "={{ $json.spreadsheetName }}"
+          },
+          "matchingColumns": [
+            "count_tabName"
+          ],
+          "schema": [
+            {
+              "id": "count_tabName",
+              "displayName": "count_tabName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "spreadsheetId",
+              "displayName": "spreadsheetId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "spreadsheetName",
+              "displayName": "spreadsheetName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tabName",
+              "displayName": "tabName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "headerRow",
+              "displayName": "headerRow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "mappedHeaders",
+              "displayName": "mappedHeaders",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "dataRow",
+              "displayName": "dataRow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        5312,
+        2144
+      ],
+      "id": "807d0b64-5a00-452f-ad7f-c9700eddc645",
+      "name": "Update Master Collection Sheet",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 3
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        5600,
+        2144
+      ],
+      "id": "df6c0e25-af3e-4248-8ba8-0bac89dd8b79",
+      "name": "Wait Between Tabs",
+      "webhookId": "ef6caf8c-ef8b-4d5e-9272-96c8ca476867",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "### 🧩 **Part 2 – Header Detection and Mapping**\n\nThis section processes all the spreadsheets gathered in **Part 1 (Sheet Collection)** and automatically detects, maps, and standardizes the headers across all tabs.\nIt ensures each sheet follows a consistent format by identifying the header row, matching each header to a master field (like *Name*, *Handle*, *Followers*, etc.), and saving the results back to the master collection.\n\n---\n\n**Main Purpose:**\nTo automatically read the first few rows of every Google Sheet tab, detect the header row, and map its column names to standard master headers for easy unification and further data processing.\n\n---\n\n**Included Steps:**\n\n1. **Get Sheets to Process:** Loads spreadsheet IDs and tab names from the main “Sheet Collection” file.\n2. **Validate Sheet Entries:** Skips any empty or invalid tabs before processing.\n3. **Loop Through Tabs:** Iterates over each sheet tab one by one to prevent API overloads.\n4. **Read Tab Data:** Fetches the first few rows from each tab for header analysis.\n5. **Detect & Map Headers:** Identifies header row and maps column names to standard master fields using synonym matching.\n6. **Merge Tab Metadata:** Combines header mappings with their corresponding tab details.\n7. **Deep Merge Results:** Consolidates all processed tab data into one structured dataset.\n8. **Update Collection Sheet:** Saves or updates header mapping results back to the “Sheet Collection” tracker.\n9. **Wait (Optional):** Adds short pauses between tabs to avoid API rate limits during large runs.\n\n---\n\n**General Notes & Tips:**\n\n* Always test with a few sample sheets before running full-scale.\n* Expand the synonym dictionary to capture new header variations over time.\n* Enable “Wait” step when processing many tabs to avoid Google API errors.\n* Clean merged or hidden rows in sheets before running detection to improve accuracy.\n",
+        "height": 1072,
+        "width": 4096,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2352,
+        1296
+      ],
+      "id": "8a6c149c-b3e3-43c6-8013-9fe9e17359c0",
+      "name": "Sticky Note23"
+    },
+    {
+      "parameters": {
+        "content": "Step 1 — Load Tab Configurations\n\nNode Name: 📥 Load Tab Settings\n\nPurpose: Retrieve all spreadsheet and tab configurations from the control sheet.\n\nDetails:\nThis step pulls rows from Sheet6, which stores metadata for each tab — including the spreadsheet ID, tab name, header row, and data row.\nThese configurations define which sheets will be processed next.\n\nExpected Output:\nA list of spreadsheet–tab objects containing all necessary parameters for data retrieval.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3456,
+        2880
+      ],
+      "typeVersion": 1,
+      "id": "dc813f15-abdd-477a-9310-64499204d718",
+      "name": "Sticky Note61"
+    },
+    {
+      "parameters": {
+        "content": "Step 4 — Normalize Headers & Data\n\nNode Name: 🧩 Standardize Tab Data\n\nPurpose: Clean and standardize column headers to a consistent master format.\n\nDetails:\nThis Code node applies a normalization script that:\n\nDefines a unified list of standard headers (BIG_HEADERS).\n\nMaps all alternative column names to their standard equivalents using a synonym dictionary.\n\nCleans up inconsistent values and removes blank rows.\n\nMoves unknown or unmapped columns into an \"Extra data\" field to preserve all information.\n\nExpected Output:\nStructured influencer records with consistent headers and clean, normalized data ready for upload.",
+        "height": 576,
+        "width": 416
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4384,
+        2880
+      ],
+      "typeVersion": 1,
+      "id": "cb7fba5e-0189-4862-a829-53e9ac8b90fa",
+      "name": "Sticky Note62"
+    },
+    {
+      "parameters": {
+        "content": "Step 3 — Fetch Sheet Data\n\nNode Name: 📄 Read Tab Content\n\nPurpose: Read raw data from the currently selected spreadsheet tab.\n\nDetails:\nThis Google Sheets node dynamically uses parameters from the loop:\n\nSpreadsheet ID → ={{ $json.spreadsheetId }}\nSheet Name → ={{ $json.tabName }}\nHeader Row → ={{ $json.headerRow }}\nData Row → ={{ $json.dataRow }}\n\nIt fetches both headers and data rows for the active tab.\n\nExpected Output:\nRaw influencer data, including headers and all cell values from the active sheet tab.",
+        "height": 576,
+        "width": 336
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4032,
+        2880
+      ],
+      "typeVersion": 1,
+      "id": "aa30802b-60ac-4207-8deb-e4a5c2686a12",
+      "name": "Sticky Note63"
+    },
+    {
+      "parameters": {
+        "content": "Step 2 — Loop Through Tabs\n\nNode Name: 🔁 Iterate Over Tab List\n\nPurpose: Process each spreadsheet–tab pair one by one in separate batches.\n\nDetails:\nThis SplitInBatches node takes the configuration list from Step 1 and runs one tab per loop cycle.\nEach iteration sends its specific spreadsheet ID and tab name to the next nodes for extraction and cleaning.\n\nExpected Output:\nSingle tab configuration per loop iteration, ready to fetch and process its data.",
+        "height": 576,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3744,
+        2880
+      ],
+      "typeVersion": 1,
+      "id": "589b6d8a-e98a-44c1-886b-dd38dc404e8d",
+      "name": "Sticky Note64"
+    },
+    {
+      "parameters": {
+        "content": "Step 5 — Update Staging Sheet\n\nNode Name: 🔄 Append or Update Standard Data\n\nPurpose: Add or update cleaned influencer records in the staging sheet.\n\nDetails:\nThis Google Sheets node takes normalized data from the previous step and either:\n\nAppends it as new entries, or\n\nUpdates existing rows based on a matching key (e.g., “INF Name”).\n\nThis ensures the staging sheet always holds the latest standardized influencer data across all processed tabs.\n\nExpected Output:\nAn up-to-date staging sheet containing the most recent standardized influencer records.",
+        "height": 576,
+        "width": 368
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4816,
+        2880
+      ],
+      "typeVersion": 1,
+      "id": "3c430ea3-9c58-4f3f-a0be-7fc7dcfac101",
+      "name": "Sticky Note65"
+    },
+    {
+      "parameters": {
+        "content": "Step 6 — Merge Final Results\n\nNode Name: ✅ Consolidate All Tabs\n\nPurpose: Combine all processed batches into one master dataset.\n\nDetails:\nAfter the loop completes, this node gathers all outputs and appends them into Sheet9, the master sheet.\nIt finalizes the merge by storing every cleaned, standardized influencer record in one unified dataset.\n\nExpected Output:\nA complete master sheet (Sheet9) containing all influencer data from every tab — fully normalized, merged, and ready for analysis or export.",
+        "height": 576,
+        "width": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        5200,
+        2880
+      ],
+      "typeVersion": 1,
+      "id": "9aba6517-4b78-4eb1-bb4c-89d4ea482ace",
+      "name": "Sticky Note66"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw",
+          "mode": "list",
+          "cachedResultName": "Sheet collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet filter",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3568,
+        3312
+      ],
+      "id": "82f078d6-26c0-421f-ac4b-c91d3842357f",
+      "name": "Load Tab Configurations",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3840,
+        3312
+      ],
+      "id": "e5e65595-109e-474b-88dc-42905f816141",
+      "name": "Loop Through Tabs1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json.tabName }}",
+          "mode": "name"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": "={{ $json.headerRow }}",
+              "firstDataRow": "={{ $json.dataRow }}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        4160,
+        3328
+      ],
+      "id": "0247785e-42a5-4082-b892-d491e6fa6609",
+      "name": "Fetch Sheet Data",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/*******************************\n * 1) EXACT MASTER HEADERS (order & case preserved)\n *******************************/\nconst BIG_HEADERS = [\n  \"INF Name\",\"Social Followers\",\"Contact\",\"Social handle\",\"Social Link\",\"Bio\",\n  \"Content category\",\"Gender\",\"Address\",\"Social Class\",\"Head\",\"Content Quality\",\n  \"Face Style\",\"Age/Age Group\",\"Comment\",\"Commitment\",\"Family\",\"Bank Details\" ,\"Attachements\" ,\"Update\",\"Place\",\"Image Link\",\"Skin / Body\" , \"Specialization\", \"Deliverables\", \"Cost\",\"Extra data\" // 🔧 added merged fields\n];\n\n/********************************************\n * 2) SYNONYMS (keys are the master headers; values are lowercase aliases)\n ********************************************/\nconst SYNONYMS = {\n  \"INF Name\": [\"inf name\",\"influencer\",\"influencer name\",\"name\",\"full name\",\"creator name\",\"inf\"],\n  \"Social Followers\": [\"followers\",\"follower count\",\"audience\",\"audience size\",\"subs\",\"subscribers\",\"total followers\",\"num of followers\",\"follower\",\"instagram followers\",\"ig followers\",\"insta followers\",\"instagram audience\",\"followers on instagram\",\"tiktok followers\",\"tt followers\",\"followers on tiktok\",\"tiktok audience\",\"social followers\",\"all followers\",\"audience total\",\"number of followers\"],\n  \"Social handle\" :[\"instagram handle\",\"instagram\",\"ig\",\"ig handle\",\"insta\",\"instagram username\",\"ig username\",\"handle\",\"ig handel\",\"insta handle\",\"handel\",\"inf instagram name\",\"clean handle\",\"tiktok handle\",\"tiktok\",\"tt handle\",\"tt\",\"tiktok username\",\"tiktok id\",\"tiktok handel\",\"social handle\",\"handles\",\"profiles\"],\n  \"Social Link\" :[\"instagram link\",\"ig link\",\"insta link\",\"instagram profile\",\"profile link\",\"instagram url\",\"ig url\",\"tiktok link\",\"tt link\",\"tiktok profile\",\"tiktok url\",\"youtube link\",\"yt link\",\"youtube\",\"channel link\",\"youtube channel\",\"youtube url\",\"yt\",\"facebook link\",\"fb link\",\"facebook\",\"facebook profile\",\"fb profile\",\"facebook url\",\"fb\",\"link\",\"url\",\"hyperlink\",\"reference link\"],\n  \"Contact\": [\"contact\",\"contacts\",\"contact info\",\"contact details\",\"reach\",\"phone/email\",\"number\",\"communication point\",\"comms\",\"main contact\",\"point of contact\",\"poc\",\"email\",\"mail\",\"e-mail\",\"email address\",\"phone\",\"telephone\",\"mobile\",\"cell\",\"phone number\",\"mobile number\",\"whatsapp\",\"whatsapp api\",\"whats app\",\"wa\",\"whatsapp number\"],\n  \"Bio\": [\"bio\",\"biography\",\"about\",\"about me\",\"description\",\"profile bio\"],\n  \"Content category\": [\"content category\",\"category\",\"niche\",\"topic\",\"content type\",\"website category\",\"field\",\"content\",\"specialization\",\"speciality\",\"specialty\",\"expertise\",\"focus area\"],\n  \"Gender\": [\"gender\",\"sex\",\"male/female\"],\n  \"Address\": [\"address\",\"location\",\"street\",\"home address\"],\n  \"Social Class\": [\"social class\",\"class\",\"socioeconomic class\",\"status\"],\n  \"Head\": [\"head style\",\"headwear\",\"hair style head\",\"head type\",\"hairstyle\",\"hair type\",\"hair texture\",\"hair\"],\n  \"Content Quality\": [\"content quality\",\"quality\",\"post quality\",\"production quality\",\"quality of content\",\"content quality\",\"qc\",\"overall quality\"],\n  \"Face Style\": [\"face style\",\"face shape\",\"appearance\"],\n  \"Age/Age Group\": [\"age\",\"age group\",\"age range\",\"years\",\"demographic\"],\n  \"Comment\": [\"comment\",\"remarks\",\"notes\",\"note\"],\n  \"Commitment\": [\"commitment\",\"availability\",\"dedication\"],\n  \"Family\" : [\"no. of kids\",\"kids\",\"children\",\"kids count\",\"children count\",\"no. of siblings\",\"siblings\",\"brothers/sisters\",\"siblings count\",\"no. of nephews\",\"nephews\",\"nieces and nephews\",\"nephew count\",\"parent\",\"guardian\",\"mother\",\"father\",\"kid\",\"child\",\"son\",\"daughter\"],\n  \"Bank Details\": [\"bank details\",\"bank\",\"account number\",\"iban\",\"bank info\"],\n  \"Attachements\": [ \"attachements\" ,\"attachments\", \"files\",\"docs\",\"documents\",\"portofolio\", \"portfolio\",\"work samples\",\"media kit\",\"image link\",\"image\",\"photo\",\"picture\",\"profile pic\",\"image url\",\"photo link\"],\n  \"Update\": [\"first update\",\"created at\",\"initial date\",\"start date\",\"created date\",\"last update\",\"updated at\",\"modified\",\"edit date\",\"update date\"],\n  \"Place\": [\"place\",\"venue\",\"location\",\"area\",\"city\",\"town\",\"municipality\",\"country\",\"nation\",\"state\"],\n  \"Skin / Body\": [\"skin / body\",\"skin\",\"body\",\"body type\",\"skin type\",\"complexion\",\"skin category\",\"skin concerns\",\"skin issues\",\"skin problems\",\"skin condition\",\"concerns\"],\n  \"Deliverables\": [\"deliverables\",\"output\",\"deliveries\",\"content deliverables\",\"submission\",\"media buying\",\"ads\",\"paid media\",\"advertising\",\"ad buying\"],\n  \"Cost\": [\"cost\",\"price\",\"total cost\",\"amount\",\"budget\",\"value\",\"rate card\",\"pricing\",\"rates\",\"fees\",\"price list\",\"negotiated rates\",\"final rates\",\"deal price\",\"discounted rates\",\"agreed rates\"],\n  \"Extra data\": [\"extra data\",\"extra\",\"misc\",\"additional info\",\"notes extra\"]\n};\n\n/********************************************\n * 3) HELPERS\n ********************************************/\nconst norm = (s) =>\n  (s ?? \"\")\n    .toString()\n    .toLowerCase()\n    .replace(/[_\\-\\/\\\\.,;:|()\\[\\]{}]+/g, \" \")\n    .replace(/\\s+/g, \" \")\n    .trim();\n\nconst aliasToHeader = (() => {\n  const map = {};\n  // Self-map ALL canonical headers\n  for (const h of BIG_HEADERS) map[norm(h)] = h;\n  // Map synonyms -> canonical headers\n  for (const [master, syns] of Object.entries(SYNONYMS)) {\n    const canonical = BIG_HEADERS.find(h => norm(h) === norm(master));\n    if (!canonical) continue;\n    for (const a of syns) map[norm(a)] = canonical;\n  }\n  return map;\n})();\n\nconst mapHeader = (cell) => aliasToHeader[norm(cell)] || null;\n\nconst asTrim = (v) => (v ?? \"\").toString().trim();\n\n// Skip rows with no meaningful data, or only \"Extra data\"\nconst rowHasAny = (obj) => {\n  const keys = Object.keys(obj);\n  const nonEmpty = keys.filter(k => asTrim(obj[k]) !== \"\");\n  if (nonEmpty.length === 0) return false;\n  if (nonEmpty.length === 1 && nonEmpty[0] === \"Extra data\") return false;\n  return true;\n};\n\n// NEW: Must have INF Name OR Social Handle; if both empty => skip\nconst isValidRow = (obj) => {\n  const infName = asTrim(obj[\"INF Name\"]);\n  const socialHandle = asTrim(obj[\"Social Handle\"]);\n  return infName !== \"\" || socialHandle !== \"\";\n};\n\nconst toCanonicalObject = (initVal = \"\") => {\n  const o = {};\n  for (const h of BIG_HEADERS) o[h] = initVal;\n  return o;\n};\n\nfunction isHeaderCandidate(row) {\n  const nonEmpty = row.filter(c => norm(c) !== \"\").length;\n  const matches = new Set(row.map(mapHeader).filter(Boolean)).size;\n  return matches >= 2 && nonEmpty >= 2;\n}\n\nfunction getGrid(items) {\n  if (items[0]?.json?.values && Array.isArray(items[0].json.values[0])) {\n    return items[0].json.values;\n  }\n  if (items[0]?.json?.rows && Array.isArray(items[0].json.rows[0])) {\n    return items[0].json.rows;\n  }\n  if (Array.isArray(items[0]?.json) && Array.isArray(items[0].json[0])) {\n    return items[0].json;\n  }\n  return null;\n}\n\nfunction alignRecord(record) {\n  const out = toCanonicalObject(\"\");\n  const extras = {};\n\n  for (const [k, v] of Object.entries(record || {})) {\n    const canonical = mapHeader(k);\n    const val = asTrim(v);\n    if (!val) continue;\n\n    if (canonical) {\n      out[canonical] = out[canonical] ? `${out[canonical]} | ${val}` : val;\n    } else if (k) {\n      if (/^row[_ ]?number$/i.test(k)) continue; // skip row_number\n      extras[k] = extras[k] ? `${extras[k]} | ${val}` : val;\n    }\n  }\n\n  out[\"Extra data\"] = Object.keys(extras).length ? JSON.stringify(extras) : \"\";\n  return out;\n}\n\n/********************************************\n * 4) MAIN\n ********************************************/\nconst output = [];\n\nconst grid = getGrid(items);\n\nif (grid) {\n  const rows = grid.filter(r => Array.isArray(r) && r.some(c => asTrim(c) !== \"\"));\n  if (!rows.length) {\n    return [];\n  }\n\n  let headerRowIndex = rows.findIndex(isHeaderCandidate);\n  if (headerRowIndex === -1) headerRowIndex = 0;\n\n  const rawHeaders = rows[headerRowIndex] || [];\n  const colMap = [];\n  const used = new Set();\n  for (let i = 0; i < rawHeaders.length; i++) {\n    const m = mapHeader(rawHeaders[i]);\n    if (m && !used.has(m)) { colMap[i] = m; used.add(m); } else colMap[i] = null;\n  }\n\n  for (let rIdx = headerRowIndex + 1; rIdx < rows.length; rIdx++) {\n    const row = rows[rIdx];\n    const obj = toCanonicalObject(\"\");\n\n    for (let c = 0; c < row.length; c++) {\n      const master = colMap[c];\n      const val = asTrim(row[c]);\n      if (!val) continue;\n      if (master) {\n        obj[master] = obj[master] ? `${obj[master]} | ${val}` : val;\n      }\n    }\n\n    const extras = {};\n    for (let c = 0; c < row.length; c++) {\n      if (colMap[c]) continue;\n      const val = asTrim(row[c]);\n      if (!val) continue;\n\n      const keyName = rawHeaders[c] ? rawHeaders[c].toString() : null;\n      if (!keyName) continue;\n      if (/^row[_ ]?number$/i.test(keyName)) continue;\n      extras[keyName] = extras[keyName] ? `${extras[keyName]} | ${val}` : val;\n    }\n    obj[\"Extra data\"] = Object.keys(extras).length ? JSON.stringify(extras) : \"\";\n\n    // Apply inclusion rules\n    if (rowHasAny(obj) && isValidRow(obj)) {\n      output.push({ json: obj });\n    }\n  }\n\n  return output;\n}\n\n// Object-mode fallback\nfor (const it of items) {\n  const candidate =\n    it.json?.asObject ??\n    it.json?.mappedRow ??\n    (typeof it.json === \"object\" && !Array.isArray(it.json) ? it.json : null);\n\n  if (!candidate) continue;\n\n  const aligned = alignRecord(candidate);\n  if (rowHasAny(aligned) && isValidRow(aligned)) output.push({ json: aligned });\n}\n\nreturn output;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4544,
+        3328
+      ],
+      "id": "9caca76d-aa22-4ed9-bb05-159170dee138",
+      "name": "Normalize Headers & Data",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw",
+          "mode": "list",
+          "cachedResultName": "Sheet collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 668307459,
+          "mode": "list",
+          "cachedResultName": "Sheets collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit#gid=668307459"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        4944,
+        3328
+      ],
+      "id": "6ca2ebb9-218e-4058-817d-63b7f8797b79",
+      "name": "Update Staging Sheet",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw",
+          "mode": "list",
+          "cachedResultName": "Sheet collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 668307459,
+          "mode": "list",
+          "cachedResultName": "Sheets collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit#gid=668307459"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "INF Name"
+          ],
+          "schema": [
+            {
+              "id": "INF Name",
+              "displayName": "INF Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "number of Followers",
+              "displayName": "number of Followers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact",
+              "displayName": "Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Instagram Handle",
+              "displayName": "Instagram Handle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Instagram link",
+              "displayName": "Instagram link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "number of Instagram Followers",
+              "displayName": "number of Instagram Followers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tiktok Handle",
+              "displayName": "Tiktok Handle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "number of Tiktok Followers",
+              "displayName": "number of Tiktok Followers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tiktok link",
+              "displayName": "Tiktok link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Youtube Link",
+              "displayName": "Youtube Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Facebook link",
+              "displayName": "Facebook link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Bio",
+              "displayName": "Bio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Communication Point",
+              "displayName": "Communication Point",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Content category",
+              "displayName": "Content category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Account Manager",
+              "displayName": "Account Manager",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "City",
+              "displayName": "City",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Country",
+              "displayName": "Country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nationality",
+              "displayName": "Nationality",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Social Class",
+              "displayName": "Social Class",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Head Style",
+              "displayName": "Head Style",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hair Type",
+              "displayName": "Hair Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rate Card",
+              "displayName": "Rate Card",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Negotiated Rates",
+              "displayName": "Negotiated Rates",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "What'sapp Api",
+              "displayName": "What'sapp Api",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Content Quality",
+              "displayName": "Content Quality",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Face Style",
+              "displayName": "Face Style",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Age/Age Group",
+              "displayName": "Age/Age Group",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Birth Date",
+              "displayName": "Birth Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Portofolio",
+              "displayName": "Portofolio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Comment",
+              "displayName": "Comment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Commitment",
+              "displayName": "Commitment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Accreditiations",
+              "displayName": "Accreditiations",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "No. of Kids",
+              "displayName": "No. of Kids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "No. of Siblings",
+              "displayName": "No. of Siblings",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "No. of nephews",
+              "displayName": "No. of nephews",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Bank Details",
+              "displayName": "Bank Details",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Type of Collabs",
+              "displayName": "Type of Collabs",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Attachements",
+              "displayName": "Attachements",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Brand/Merch",
+              "displayName": "Brand/Merch",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Languages",
+              "displayName": "Languages",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "First Update",
+              "displayName": "First Update",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Update",
+              "displayName": "Last Update",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Parent",
+              "displayName": "Parent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Kid",
+              "displayName": "Kid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Place",
+              "displayName": "Place",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Link",
+              "displayName": "Image Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Quality of Content",
+              "displayName": "Quality of Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skin / Body",
+              "displayName": "Skin / Body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skin Type",
+              "displayName": "Skin Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skin Concerns",
+              "displayName": "Skin Concerns",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Specialization",
+              "displayName": "Specialization",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UGC Creator",
+              "displayName": "UGC Creator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Media Buying",
+              "displayName": "Media Buying",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Deliverables",
+              "displayName": "Deliverables",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Cost",
+              "displayName": "Cost",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Link",
+              "displayName": "Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Platform",
+              "displayName": "Platform",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Extra data",
+              "displayName": "Extra data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        5296,
+        3296
+      ],
+      "id": "dedc44af-0537-4b77-85aa-e06fec7d6c2a",
+      "name": "Merge Final Results",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### 🧩 **Part 3 – Data Normalization and Consolidation**\n\nThis section automates the process of **reading influencer data from multiple spreadsheet tabs**, **standardizing headers and content**, and **merging everything into one unified master sheet**.\nIt ensures every influencer record—regardless of how it was originally formatted—is transformed into a clean, consistent, and analytics-ready dataset stored in the final “Master Sheet” (Sheet9).\n\n---\n\n**Main Purpose:**\nTo loop through all configured tabs listed in *Sheet6*, fetch their content, standardize their headers and structure, and consolidate all cleaned influencer data into one organized master collection.\n\n---\n\n**Included Steps:**\n\n1. **Load Tab Configurations:**\n   Retrieves all tab details (spreadsheet ID, tab name, header row, and data row) from **Sheet6**, which acts as the control sheet.\n   These entries define which tabs will be fetched and processed in the workflow.\n\n2. **Loop Through Tabs:**\n   Iterates through each tab configuration one by one using a *Split In Batches* node.\n   This ensures the process runs efficiently without overloading Google Sheets API requests.\n\n3. **Fetch Sheet Data:**\n   Uses the tab-specific parameters from the loop (spreadsheet ID, tab name, header row, and data row) to read the actual data from each Google Sheet tab.\n   The node extracts all rows and columns into structured JSON format for processing.\n\n4. **Normalize Headers & Data:**\n   Runs a JavaScript code node that:\n\n   * Standardizes column names using a predefined set of **master headers** (like *INF Name*, *Followers*, *Handle*, *Cost*, etc.).\n   * Uses a synonym dictionary to detect variations of the same field (e.g., “Instagram Name”, “Influencer”, or “Name” → *INF Name*).\n   * Cleans inconsistent formats, empty cells, and misplaced data.\n   * Moves unmatched or extra fields into an *Extra Data* column to preserve all information.\n     This ensures uniform structure across all source tabs.\n\n5. **Append or Update Standard Data:**\n   The cleaned and standardized records are appended or updated into a **staging sheet**, ensuring all influencer data follows one consistent format.\n   This intermediate step ensures updates are synchronized without duplicates before merging to the master file.\n\n6. **Merge Final Results:**\n   Once all tabs are processed, the final node appends the complete set of standardized influencer data into **Sheet9**, the master collection.\n   This creates a single consolidated dataset covering all influencer records from every tab.\n\n---\n\n**General Notes & Tips:**\n\n* Always confirm that **Sheet6** contains accurate spreadsheet IDs, tab names, and header/data row numbers before execution.\n* Expand the **synonym dictionary** in the normalization script as you discover new variations in influencer data headers.\n* To prevent rate limits, keep a small delay (e.g., 2–3 seconds) between loop iterations if working with many sheets.\n* The “Append or Update” step can be customized to detect duplicates using unique keys like *INF Name* or *Social Handle*.\n* After the merge, perform a quick scan of **Sheet9** to confirm that all headers align perfectly with the defined master schema.\n\n",
+        "height": 1152,
+        "width": 4096,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2352,
+        2384
+      ],
+      "id": "155c141b-7e28-4f45-b699-6b0f62794589",
+      "name": "Sticky Note24"
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 **Google Sheets Data Automation — Full Workflow Guide**\n\n### 📘 **Overview**\n\nThis full n8n workflow automates the process of collecting, analyzing, and merging influencer data from multiple Google Sheets in your Google Drive.\nIt converts scattered and inconsistent files into one clean, standardized, and analytics-ready master sheet — completely automated.\n\nThe workflow is divided into three connected parts:\n\n**Part 1 – Google Sheets Collector**\nFinds all Google Sheets in your Drive, reads their tab names, and stores everything in one tracker sheet.\n\n**Part 2 – Header Detection and Mapping**\nReads each tab’s header row and maps all column names into a unified format using standard master fields.\n\n**Part 3 – Data Normalization and Consolidation**\nFetches all influencer data, standardizes headers and structure, and merges everything into one “Master Sheet.”\n\n---\n\n### ⚙️ **General Workflow Summary**\n\n1. The first part scans your entire Google Drive and automatically detects all Google Sheets. It collects each file’s tab names and builds a tracker file called “Sheet Collection.” This sheet becomes the reference index for all the following processes.\n\n2. The second part reads the header rows from each tab listed in the Sheet Collection. It then detects and maps every header name to a unified master schema using a built-in synonym dictionary. For example, columns like “Influencer,” “Instagram Name,” or “Account” are all recognized and converted into a standard “INF Name” field.\n\n3. The third part reads the data from each tab (based on configurations stored in Sheet6). It normalizes all headers and cell content, cleans inconsistencies, moves extra information into an “Extra Data” column, and finally merges all standardized rows into one master file called “Sheet9.”\n   This creates a single, complete, and fully unified influencer dataset ready for analysis or upload to CRMs.\n\n---\n\n### 🧩 **Core Process Overview**\n\nThe workflow works in sequence:\nFirst, all Google Sheets and their tabs are detected.\nThen, the system analyzes the structure and builds a consistent header mapping.\nFinally, all cleaned data is merged into one organized master database.\n\nEach part can be tested or executed independently, but they are designed to run in order for the full automation to function correctly.\n\n---\n\n### 🧭 **General Notes & Tips**\n\n**Workflow Preparation**\nMake sure your Google account is connected to n8n with access to both Drive and Sheets APIs.\nBefore starting, create these sheets inside your Google Drive:\n\n* “Sheet Collection” → used as output for Part 1\n* “Sheet6” → contains tab configurations for Part 3\n* “Sheet9” → used as the final master database\n\n**API and Performance Notes**\nAlways include a short delay (2–3 seconds) between loops or batches to avoid Google API rate limits.\nUse the optional “Limit” nodes for testing when working with many files to avoid long runs or timeouts.\n\n**Header Mapping Tips**\nUpdate the synonym dictionary regularly to capture new column naming variations as they appear in your source sheets.\nKeep column names short, consistent, and clear — it will make future matching faster and more reliable.\n\n**Data Quality Tips**\nClean your original spreadsheets before running the workflow.\nRemove unused tabs, duplicates, and irrelevant files to improve both performance and accuracy.\nAfter adding new spreadsheets or tabs, rerun Part 1 to refresh your index automatically.\n\n**Automation & Scheduling**\nYou can schedule each part to run automatically using n8n’s Cron trigger:\n\n* Run Part 1 daily or weekly to refresh the file index.\n* Run Part 2 whenever new sheets or headers are added.\n* Run Part 3 after mapping is complete or on demand to rebuild the master sheet.\n\n**Maintenance Tips**\nCheck the “Sheet Collection” and “Master Sheet” occasionally to ensure all tabs and columns are mapped correctly.\nIf errors occur or new data sources are added, clear and rerun the collector to rebuild the index from scratch.\nYou can also add error handling or logging nodes to record failed runs or skipped files.\n\n---\n\n### 🚀 **Final Result**\n\nAfter running all three parts, your influencer data pipeline becomes fully automated.\nAll Google Sheets in your Drive are discovered, analyzed, cleaned, and merged into one organized and standardized master sheet.\nFrom now on, updating or expanding your dataset requires no manual copying or merging — just re-run the workflow and the system does everything automatically.\n\n\n",
+        "height": 4912,
+        "width": 6528,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "14aec5f2-9dfe-431d-9939-9956d0125944",
+      "name": "Sticky Note25"
+    },
+    {
+      "parameters": {
+        "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{$json[\"id\"]}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4256,
+        4656
+      ],
+      "id": "8ea3baec-f24a-4f0a-9ded-12a786ef7252",
+      "name": "HTTP Request3",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleOAuth2Api": {
+          "id": "EqFd9EyowzlZ7ZdS",
+          "name": "Google account"
+        },
+        "googleDriveOAuth2Api": {
+          "id": "AG0ZV4fMVkHhgdg6",
+          "name": "Google Drive account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const file = $json;\nconst spreadsheetId = file.spreadsheetId;\nconst spreadsheetName = file.properties.title;\n\nconst results = [];\n\nfor (let i = 0; i < (file.sheets || []).length; i++) {\n  const sheet = file.sheets[i];\n  const tabName = sheet?.properties?.title;\n\n  if (tabName) {\n    results.push({\n      spreadsheetId,\n      spreadsheetName,\n      tabName,\n    });\n  }\n}\n\nreturn results;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4544,
+        4656
+      ],
+      "id": "2ddaef8b-dfbc-436f-8cba-6828a941706d",
+      "name": "Code6",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4848,
+        4656
+      ],
+      "id": "1672676c-6fe1-4734-8c48-2bb3cf0c98eb",
+      "name": "Wait9",
+      "webhookId": "0c3c5940-d8f7-482e-9195-a1adcf1c9318",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        5120,
+        4624
+      ],
+      "id": "1c36dc3f-c748-41f5-9d0a-ae934e367ee0",
+      "name": "Loop Over Items14"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json.tabName }}",
+          "mode": "name"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": "={{ $json.headerRow }}",
+              "firstDataRow": "={{ $json.dataRow }}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        5424,
+        4640
+      ],
+      "id": "91e21467-9b24-434d-a1d1-a7a6ba69dccb",
+      "name": "Google sheet 4",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "/*******************************\n * 1) EXACT MASTER HEADERS (order & case preserved)\n *******************************/\nconst BIG_HEADERS = [\n  \"INF Name\",\"Social Followers\",\"Contact\",\"Social handle\",\"Social Link\",\"Bio\",\n  \"Content category\",\"Gender\",\"Address\",\"Social Class\",\"Head\",\"Content Quality\",\n  \"Face Style\",\"Age/Age Group\",\"Comment\",\"Commitment\",\"Family\",\"Bank Details\" ,\"Attachements\" ,\"Update\",\"Place\",\"Image Link\",\"Skin / Body\" , \"Specialization\", \"Deliverables\", \"Cost\",\"Extra data\" // 🔧 added merged fields\n];\n\n/********************************************\n * 2) SYNONYMS (keys are the master headers; values are lowercase aliases)\n ********************************************/\nconst SYNONYMS = {\n  \"INF Name\": [\"inf name\",\"influencer\",\"influencer name\",\"name\",\"full name\",\"creator name\",\"inf\"],\n  \"Social Followers\": [\"followers\",\"follower count\",\"audience\",\"audience size\",\"subs\",\"subscribers\",\"total followers\",\"num of followers\",\"follower\",\"instagram followers\",\"ig followers\",\"insta followers\",\"instagram audience\",\"followers on instagram\",\"tiktok followers\",\"tt followers\",\"followers on tiktok\",\"tiktok audience\",\"social followers\",\"all followers\",\"audience total\",\"number of followers\"],\n  \"Social handle\" :[\"instagram handle\",\"instagram\",\"ig\",\"ig handle\",\"insta\",\"instagram username\",\"ig username\",\"handle\",\"ig handel\",\"insta handle\",\"handel\",\"inf instagram name\",\"clean handle\",\"tiktok handle\",\"tiktok\",\"tt handle\",\"tt\",\"tiktok username\",\"tiktok id\",\"tiktok handel\",\"social handle\",\"handles\",\"profiles\"],\n  \"Social Link\" :[\"instagram link\",\"ig link\",\"insta link\",\"instagram profile\",\"profile link\",\"instagram url\",\"ig url\",\"tiktok link\",\"tt link\",\"tiktok profile\",\"tiktok url\",\"youtube link\",\"yt link\",\"youtube\",\"channel link\",\"youtube channel\",\"youtube url\",\"yt\",\"facebook link\",\"fb link\",\"facebook\",\"facebook profile\",\"fb profile\",\"facebook url\",\"fb\",\"link\",\"url\",\"hyperlink\",\"reference link\"],\n  \"Contact\": [\"contact\",\"contacts\",\"contact info\",\"contact details\",\"reach\",\"phone/email\",\"number\",\"communication point\",\"comms\",\"main contact\",\"point of contact\",\"poc\",\"email\",\"mail\",\"e-mail\",\"email address\",\"phone\",\"telephone\",\"mobile\",\"cell\",\"phone number\",\"mobile number\",\"whatsapp\",\"whatsapp api\",\"whats app\",\"wa\",\"whatsapp number\"],\n  \"Bio\": [\"bio\",\"biography\",\"about\",\"about me\",\"description\",\"profile bio\"],\n  \"Content category\": [\"content category\",\"category\",\"niche\",\"topic\",\"content type\",\"website category\",\"field\",\"content\",\"specialization\",\"speciality\",\"specialty\",\"expertise\",\"focus area\"],\n  \"Gender\": [\"gender\",\"sex\",\"male/female\"],\n  \"Address\": [\"address\",\"location\",\"street\",\"home address\"],\n  \"Social Class\": [\"social class\",\"class\",\"socioeconomic class\",\"status\"],\n  \"Head\": [\"head style\",\"headwear\",\"hair style head\",\"head type\",\"hairstyle\",\"hair type\",\"hair texture\",\"hair\"],\n  \"Content Quality\": [\"content quality\",\"quality\",\"post quality\",\"production quality\",\"quality of content\",\"content quality\",\"qc\",\"overall quality\"],\n  \"Face Style\": [\"face style\",\"face shape\",\"appearance\"],\n  \"Age/Age Group\": [\"age\",\"age group\",\"age range\",\"years\",\"demographic\"],\n  \"Comment\": [\"comment\",\"remarks\",\"notes\",\"note\"],\n  \"Commitment\": [\"commitment\",\"availability\",\"dedication\"],\n  \"Family\" : [\"no. of kids\",\"kids\",\"children\",\"kids count\",\"children count\",\"no. of siblings\",\"siblings\",\"brothers/sisters\",\"siblings count\",\"no. of nephews\",\"nephews\",\"nieces and nephews\",\"nephew count\",\"parent\",\"guardian\",\"mother\",\"father\",\"kid\",\"child\",\"son\",\"daughter\"],\n  \"Bank Details\": [\"bank details\",\"bank\",\"account number\",\"iban\",\"bank info\"],\n  \"Attachements\": [ \"attachements\" ,\"attachments\", \"files\",\"docs\",\"documents\",\"portofolio\", \"portfolio\",\"work samples\",\"media kit\",\"image link\",\"image\",\"photo\",\"picture\",\"profile pic\",\"image url\",\"photo link\"],\n  \"Update\": [\"first update\",\"created at\",\"initial date\",\"start date\",\"created date\",\"last update\",\"updated at\",\"modified\",\"edit date\",\"update date\"],\n  \"Place\": [\"place\",\"venue\",\"location\",\"area\",\"city\",\"town\",\"municipality\",\"country\",\"nation\",\"state\"],\n  \"Skin / Body\": [\"skin / body\",\"skin\",\"body\",\"body type\",\"skin type\",\"complexion\",\"skin category\",\"skin concerns\",\"skin issues\",\"skin problems\",\"skin condition\",\"concerns\"],\n  \"Deliverables\": [\"deliverables\",\"output\",\"deliveries\",\"content deliverables\",\"submission\",\"media buying\",\"ads\",\"paid media\",\"advertising\",\"ad buying\"],\n  \"Cost\": [\"cost\",\"price\",\"total cost\",\"amount\",\"budget\",\"value\",\"rate card\",\"pricing\",\"rates\",\"fees\",\"price list\",\"negotiated rates\",\"final rates\",\"deal price\",\"discounted rates\",\"agreed rates\"],\n  \"Extra data\": [\"extra data\",\"extra\",\"misc\",\"additional info\",\"notes extra\"]\n};\n\n/********************************************\n * 3) HELPERS\n ********************************************/\nconst norm = (s) =>\n  (s ?? \"\")\n    .toString()\n    .toLowerCase()\n    .replace(/[_\\-\\/\\\\.,;:|()\\[\\]{}]+/g, \" \")\n    .replace(/\\s+/g, \" \")\n    .trim();\n\nconst aliasToHeader = (() => {\n  const map = {};\n  // Self-map ALL canonical headers\n  for (const h of BIG_HEADERS) map[norm(h)] = h;\n  // Map synonyms -> canonical headers\n  for (const [master, syns] of Object.entries(SYNONYMS)) {\n    const canonical = BIG_HEADERS.find(h => norm(h) === norm(master));\n    if (!canonical) continue;\n    for (const a of syns) map[norm(a)] = canonical;\n  }\n  return map;\n})();\n\nconst mapHeader = (cell) => aliasToHeader[norm(cell)] || null;\n\nconst asTrim = (v) => (v ?? \"\").toString().trim();\n\n// Skip rows with no meaningful data, or only \"Extra data\"\nconst rowHasAny = (obj) => {\n  const keys = Object.keys(obj);\n  const nonEmpty = keys.filter(k => asTrim(obj[k]) !== \"\");\n  if (nonEmpty.length === 0) return false;\n  if (nonEmpty.length === 1 && nonEmpty[0] === \"Extra data\") return false;\n  return true;\n};\n\n// NEW: Must have INF Name OR Social Handle; if both empty => skip\nconst isValidRow = (obj) => {\n  const infName = asTrim(obj[\"INF Name\"]);\n  const socialHandle = asTrim(obj[\"Social Handle\"]);\n  return infName !== \"\" || socialHandle !== \"\";\n};\n\nconst toCanonicalObject = (initVal = \"\") => {\n  const o = {};\n  for (const h of BIG_HEADERS) o[h] = initVal;\n  return o;\n};\n\nfunction isHeaderCandidate(row) {\n  const nonEmpty = row.filter(c => norm(c) !== \"\").length;\n  const matches = new Set(row.map(mapHeader).filter(Boolean)).size;\n  return matches >= 2 && nonEmpty >= 2;\n}\n\nfunction getGrid(items) {\n  if (items[0]?.json?.values && Array.isArray(items[0].json.values[0])) {\n    return items[0].json.values;\n  }\n  if (items[0]?.json?.rows && Array.isArray(items[0].json.rows[0])) {\n    return items[0].json.rows;\n  }\n  if (Array.isArray(items[0]?.json) && Array.isArray(items[0].json[0])) {\n    return items[0].json;\n  }\n  return null;\n}\n\nfunction alignRecord(record) {\n  const out = toCanonicalObject(\"\");\n  const extras = {};\n\n  for (const [k, v] of Object.entries(record || {})) {\n    const canonical = mapHeader(k);\n    const val = asTrim(v);\n    if (!val) continue;\n\n    if (canonical) {\n      out[canonical] = out[canonical] ? `${out[canonical]} | ${val}` : val;\n    } else if (k) {\n      if (/^row[_ ]?number$/i.test(k)) continue; // skip row_number\n      extras[k] = extras[k] ? `${extras[k]} | ${val}` : val;\n    }\n  }\n\n  out[\"Extra data\"] = Object.keys(extras).length ? JSON.stringify(extras) : \"\";\n  return out;\n}\n\n/********************************************\n * 4) MAIN\n ********************************************/\nconst output = [];\n\nconst grid = getGrid(items);\n\nif (grid) {\n  const rows = grid.filter(r => Array.isArray(r) && r.some(c => asTrim(c) !== \"\"));\n  if (!rows.length) {\n    return [];\n  }\n\n  let headerRowIndex = rows.findIndex(isHeaderCandidate);\n  if (headerRowIndex === -1) headerRowIndex = 0;\n\n  const rawHeaders = rows[headerRowIndex] || [];\n  const colMap = [];\n  const used = new Set();\n  for (let i = 0; i < rawHeaders.length; i++) {\n    const m = mapHeader(rawHeaders[i]);\n    if (m && !used.has(m)) { colMap[i] = m; used.add(m); } else colMap[i] = null;\n  }\n\n  for (let rIdx = headerRowIndex + 1; rIdx < rows.length; rIdx++) {\n    const row = rows[rIdx];\n    const obj = toCanonicalObject(\"\");\n\n    for (let c = 0; c < row.length; c++) {\n      const master = colMap[c];\n      const val = asTrim(row[c]);\n      if (!val) continue;\n      if (master) {\n        obj[master] = obj[master] ? `${obj[master]} | ${val}` : val;\n      }\n    }\n\n    const extras = {};\n    for (let c = 0; c < row.length; c++) {\n      if (colMap[c]) continue;\n      const val = asTrim(row[c]);\n      if (!val) continue;\n\n      const keyName = rawHeaders[c] ? rawHeaders[c].toString() : null;\n      if (!keyName) continue;\n      if (/^row[_ ]?number$/i.test(keyName)) continue;\n      extras[keyName] = extras[keyName] ? `${extras[keyName]} | ${val}` : val;\n    }\n    obj[\"Extra data\"] = Object.keys(extras).length ? JSON.stringify(extras) : \"\";\n\n    // Apply inclusion rules\n    if (rowHasAny(obj) && isValidRow(obj)) {\n      output.push({ json: obj });\n    }\n  }\n\n  return output;\n}\n\n// Object-mode fallback\nfor (const it of items) {\n  const candidate =\n    it.json?.asObject ??\n    it.json?.mappedRow ??\n    (typeof it.json === \"object\" && !Array.isArray(it.json) ? it.json : null);\n\n  if (!candidate) continue;\n\n  const aligned = alignRecord(candidate);\n  if (rowHasAny(aligned) && isValidRow(aligned)) output.push({ json: aligned });\n}\n\nreturn output;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5712,
+        4640
+      ],
+      "id": "9e92077f-e75c-4b18-8e42-66aee8f57cf5",
+      "name": "Code12",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        6272,
+        4640
+      ],
+      "id": "e4ec9e31-cedb-4f5b-8207-27aa2acf61dd",
+      "name": "Wait7",
+      "webhookId": "21a2fae9-71f1-430a-aa4a-34bffc1d2ad3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw",
+          "mode": "list",
+          "cachedResultName": "Sheet collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 668307459,
+          "mode": "list",
+          "cachedResultName": "Sheets collection",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AI-jvZZQQ-dNLsSxrUT6gbFle9ODoTR-Res1Mck2zgw/edit#gid=668307459"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "INF Name"
+          ],
+          "schema": [
+            {
+              "id": "INF Name",
+              "displayName": "INF Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "number of Followers",
+              "displayName": "number of Followers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact",
+              "displayName": "Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Instagram Handle",
+              "displayName": "Instagram Handle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Instagram link",
+              "displayName": "Instagram link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "number of Instagram Followers",
+              "displayName": "number of Instagram Followers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tiktok Handle",
+              "displayName": "Tiktok Handle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "number of Tiktok Followers",
+              "displayName": "number of Tiktok Followers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tiktok link",
+              "displayName": "Tiktok link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Youtube Link",
+              "displayName": "Youtube Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Facebook link",
+              "displayName": "Facebook link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Bio",
+              "displayName": "Bio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Communication Point",
+              "displayName": "Communication Point",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Content category",
+              "displayName": "Content category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Account Manager",
+              "displayName": "Account Manager",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "City",
+              "displayName": "City",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Country",
+              "displayName": "Country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nationality",
+              "displayName": "Nationality",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Social Class",
+              "displayName": "Social Class",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Head Style",
+              "displayName": "Head Style",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hair Type",
+              "displayName": "Hair Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rate Card",
+              "displayName": "Rate Card",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Negotiated Rates",
+              "displayName": "Negotiated Rates",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "What'sapp Api",
+              "displayName": "What'sapp Api",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Content Quality",
+              "displayName": "Content Quality",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Face Style",
+              "displayName": "Face Style",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Age/Age Group",
+              "displayName": "Age/Age Group",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Birth Date",
+              "displayName": "Birth Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Portofolio",
+              "displayName": "Portofolio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Comment",
+              "displayName": "Comment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Commitment",
+              "displayName": "Commitment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Accreditiations",
+              "displayName": "Accreditiations",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "No. of Kids",
+              "displayName": "No. of Kids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "No. of Siblings",
+              "displayName": "No. of Siblings",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "No. of nephews",
+              "displayName": "No. of nephews",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Bank Details",
+              "displayName": "Bank Details",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Type of Collabs",
+              "displayName": "Type of Collabs",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Attachements",
+              "displayName": "Attachements",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Brand/Merch",
+              "displayName": "Brand/Merch",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Languages",
+              "displayName": "Languages",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "First Update",
+              "displayName": "First Update",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Update",
+              "displayName": "Last Update",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Parent",
+              "displayName": "Parent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Kid",
+              "displayName": "Kid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Place",
+              "displayName": "Place",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Link",
+              "displayName": "Image Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Quality of Content",
+              "displayName": "Quality of Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skin / Body",
+              "displayName": "Skin / Body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skin Type",
+              "displayName": "Skin Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skin Concerns",
+              "displayName": "Skin Concerns",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Specialization",
+              "displayName": "Specialization",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UGC Creator",
+              "displayName": "UGC Creator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Media Buying",
+              "displayName": "Media Buying",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Deliverables",
+              "displayName": "Deliverables",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Cost",
+              "displayName": "Cost",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Link",
+              "displayName": "Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Platform",
+              "displayName": "Platform",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Extra data",
+              "displayName": "Extra data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        6000,
+        4640
+      ],
+      "id": "c3afe217-e4e8-482d-aa8e-4d88158b356b",
+      "name": "Append or update row in sheet4",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6unVJgf6MRO2lgVY",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "=",
+        "returnAll": true,
+        "filter": {
+          "whatToSearch": "files",
+          "includeTrashed": false
+        },
+        "options": {
+          "fields": [
+            "mimeType",
+            "id",
+            "name"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        3120,
+        4656
+      ],
+      "id": "31273a8c-d8e2-4967-8b93-b73c0cd02c8f",
+      "name": "Search Google Drive Files1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "AG0ZV4fMVkHhgdg6",
+          "name": "Google Drive account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "fad642ee-cb11-4aac-8198-40ce63ac8cfe",
+              "leftValue": "={{ $json.mimeType }}",
+              "rightValue": "application/vnd.google-apps.spreadsheet",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3408,
+        4656
+      ],
+      "id": "4d3637de-ad9f-4580-9036-4ec406a3ca29",
+      "name": "Filter Only Google Sheets1"
+    },
+    {
+      "parameters": {
+        "content": "\n## ⚡ **Google Sheets Data Automation — Simplified Workflow Guide**\n\n### 📘 **Overview**\n\nThis workflow automates reading and merging influencer data from a few known Google Sheets in your Drive.\nIt’s ideal for **small, stable datasets** with **no expected API or structure errors**, allowing it to run directly without manual checks or error handling.\n\n---\n\n### 🧩 **Main Workflow Summary (3 Stages)**\n\n**Stage 1 – Google Sheets Finder**\nSearches your Google Drive, filters for Google Sheets, and limits to a few known files.\nIt lists each spreadsheet’s ID and tab names for processing.\n\n**Stage 2 – Sheet Tabs Reader**\nLoops through each detected sheet and tab, reads metadata from Google Sheets API, and extracts details like spreadsheet name and tab titles.\n\n**Stage 3 – Data Processor & Merger**\nFetches data from each tab, processes rows, merges all cleaned data, and produces one unified master output sheet.\n\n---\n\n### ⚙️ **Usage Notes**\n\n* Designed for **small, predictable datasets** (few Google Sheets, known structure).\n* No error handling or complex logic needed — runs cleanly when all sheets are valid and accessible.\n* Can be executed manually or scheduled in n8n for simple automation.\n\n---\n\n### 🚀 **Result**\n\nAll your influencer or sheet data is read, organized, and merged automatically into a single, consistent output sheet — ready for review or analysis, with minimal setup.\n\n",
+        "height": 1280,
+        "width": 4096,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2336,
+        3600
+      ],
+      "typeVersion": 1,
+      "id": "ff60661a-c5ae-4322-92a2-b9c6ecdf50e7",
+      "name": "Sticky Note26"
+    },
+    {
+      "parameters": {
+        "maxItems": 3
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        3696,
+        4640
+      ],
+      "id": "4c3831d8-6766-42df-982d-121776e4adb2",
+      "name": "LIMIT"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3984,
+        4640
+      ],
+      "id": "3f6e5d29-49d8-4966-9d19-8502b7c4d6ca",
+      "name": "LOOP"
+    },
+    {
+      "parameters": {
+        "content": "# ⚠️ Important Note\n\n## This version is a *summarized and simplified form of the Main Project*.\nIt should only be used when the following conditions are met:\n\n* The Google Sheets are few in number and their names/structures are known in advance.\n* No major header differences, empty tabs, or API failures are expected.\n* The workflow is intended for direct execution — not large-scale automation or unpredictable datasets.\n\nIf your project involves many unknown or dynamic sheets, use the Full Workflow (Main Project) with all error handling and header-mapping logic included.",
+        "height": 528,
+        "width": 1088,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4576,
+        3744
+      ],
+      "typeVersion": 1,
+      "id": "cd428689-5bae-43b8-b99a-e87d4c1c0e8c",
+      "name": "Sticky Note27"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Search Google Drive Files": {
+      "main": [
+        [
+          {
+            "node": "Filter Only Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Only Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Limit Sheets for Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Tab Names from Spreadsheet": {
+      "main": [
+        [
+          {
+            "node": "Wait Between Spreadsheet Loops",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Spreadsheet Metadata": {
+      "main": [
+        [
+          {
+            "node": "Extract Tab Names from Spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Through Each Spreadsheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Tabs",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Spreadsheet Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit Sheets for Processing": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Each Spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Between Spreadsheet Loops": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Each Spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Through Tabs": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Get Master Sheet Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge Tab and Counter Data",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get Master Sheet Data": {
+      "main": [
+        [
+          {
+            "node": "Generate Next Tab Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Next Tab Count": {
+      "main": [
+        [
+          {
+            "node": "Merge Tab and Counter Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Tab and Counter Data": {
+      "main": [
+        [
+          {
+            "node": "Prepare Final Tab Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Final Tab Record": {
+      "main": [
+        [
+          {
+            "node": "Append Tab Record to Collection Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append Tab Record to Collection Sheet": {
+      "main": [
+        [
+          {
+            "node": "Wait Before Next Batch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Before Next Batch": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Tabs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Filtered Sheet List": {
+      "main": [
+        [
+          {
+            "node": "Conditional Check for Empty Mappings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conditional Check for Empty Mappings": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Each Tab",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Through Each Tab": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Read Tab Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge Tab Metadata",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Read Tab Data": {
+      "main": [
+        [
+          {
+            "node": "Detect and Map Headers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect and Map Headers": {
+      "main": [
+        [
+          {
+            "node": "Merge Tab Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Tab Metadata": {
+      "main": [
+        [
+          {
+            "node": "Deep Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deep Merge Results": {
+      "main": [
+        [
+          {
+            "node": "Update Master Collection Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Master Collection Sheet": {
+      "main": [
+        [
+          {
+            "node": "Wait Between Tabs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Between Tabs": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Each Tab",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Tab Configurations": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Tabs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Through Tabs1": {
+      "main": [
+        [
+          {
+            "node": "Merge Final Results",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Sheet Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Sheet Data": {
+      "main": [
+        [
+          {
+            "node": "Normalize Headers & Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Headers & Data": {
+      "main": [
+        [
+          {
+            "node": "Update Staging Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Staging Sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Tabs1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Code6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code6": {
+      "main": [
+        [
+          {
+            "node": "Wait9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait9": {
+      "main": [
+        [
+          {
+            "node": "LOOP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items14": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Google sheet 4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google sheet 4": {
+      "main": [
+        [
+          {
+            "node": "Code12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code12": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait7": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items14",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet4": {
+      "main": [
+        [
+          {
+            "node": "Wait7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Google Drive Files1": {
+      "main": [
+        [
+          {
+            "node": "Filter Only Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Only Google Sheets1": {
+      "main": [
+        [
+          {
+            "node": "LIMIT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LIMIT": {
+      "main": [
+        [
+          {
+            "node": "LOOP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LOOP": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items14",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "",
+  "meta": {
+    "instanceId": "42e7a059891abee801d3209c5f3788d2bff0ccd72a43fc3e429d92455a855d27"
+  },
+  "tags": []
+}
