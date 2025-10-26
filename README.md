@@ -75,9 +75,13 @@ The workflow updates translations and phonetic results directly within a connect
 If you’re interested in automation projects, workflow design, or integrating AI into business processes, feel free to connect or reach out.
 
 **👤 Author:** *Sief Shama*
+
 **💼 Focus:** *Automation Development · AI Integration · Data Workflows*
+
 **🌐 Portfolio:** *to be added once live*
+
 **📧 Email:** *siefshama@gmail.com*
+
 **🔗 LinkedIn / GitHub:** *[https://www.linkedin.com/in/siefshama/](https://www.linkedin.com/in/siefshama/)*
 
 
