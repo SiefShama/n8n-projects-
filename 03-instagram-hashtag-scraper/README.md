@@ -77,7 +77,7 @@ They enter the hashtag, run the workflow, and receive a clean Google Sheet conta
 ## 📸 **Preview**
 
 <p align="center">
-  <img src="../assets/instagram-hashtag-scraper-diagram.png" alt="Instagram Hashtag Scraper Workflow" width="800">
+  <img src="../assets/instagram-hashtag-scraper-workflow.png" alt="Instagram Hashtag Scraper Workflow" width="800">
 </p>
 
 > *Workflow diagram showing the end-to-end process from hashtag input to Google Sheets export.*
